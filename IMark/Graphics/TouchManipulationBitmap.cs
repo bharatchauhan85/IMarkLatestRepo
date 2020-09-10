@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using IMark.Areas.PopUp;
 using SkiaSharp;
 
 using TouchTracking;
+using Xamarin.Forms;
 
 namespace SkiaSharpFormsDemos.Transforms
 {
     class TouchManipulationBitmap
     {
         SKBitmap bitmap;
-
+        public TextInfo Text;
         Dictionary<long, TouchManipulationInfo> touchDictionary =
             new Dictionary<long, TouchManipulationInfo>();
+        public bool IsEmoji = false;
 
         public TouchManipulationBitmap(SKBitmap bitmap)
         {
@@ -113,6 +115,16 @@ namespace SkiaSharpFormsDemos.Transforms
             SKMatrix matrix = Matrix;
             SKMatrix.PostConcat(ref matrix, touchMatrix);
             Matrix = matrix;
+        }
+
+        internal SKBitmap GetBitmap()
+        {
+            return bitmap;
+        }
+
+        internal void SetbitMap(SKBitmap sKBitmap)
+        {
+            bitmap = sKBitmap;
         }
     }
 }

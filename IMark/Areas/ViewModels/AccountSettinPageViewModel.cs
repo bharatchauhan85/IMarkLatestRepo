@@ -114,78 +114,62 @@ namespace IMark.Areas.ViewModels
         });
         public ICommand SaveCommand => new Command(async (obj) =>
         {
-            if(string.IsNullOrEmpty(ProfileName))
-            {
-                await ShowAlert("Name is mandetory");
-                return;
-            }
-            if (!ProfileName.Contains(" "))
-            {
-                await ShowAlert("Enter first name and last name with space");
-                return;
-            }
-            if(string.IsNullOrEmpty(PhoneNumber) && PhoneNumber.Length < 5 && PhoneNumber.Length> 15)
-            {
-                await ShowAlert("Enter valid phone number");
-                return;
-            }
-
-            string queryid_id = @"mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
-                                  customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
-                                    customer {
-                                      id
-                                    }
-                                    customerAccessToken {
-                                      accessToken
-                                      expiresAt
-                                    }
-                                    customerUserErrors {
-                                      code
-                                      field
-                                      message
-                                    }
-                                  }
-                                }";
-            CustomerUpdateRequest request = new CustomerUpdateRequest();
-            request.customer = new UpdateCustomer();
-            request.customerAccessToken = SettingExtension.AccessToken;
-            request.customer.firstName = ProfileName.Split(' ')[0];
-            request.customer.lastName = ProfileName.Split(' ')[1];
-            request.customer.phone = PhoneNumber;
-            try
-            {
-                var res = await _apiService.CustomerUpdate(queryid_id, request);
-                if (!string.IsNullOrEmpty(res?.data?.customerUpdate?.customer?.id))
-                {
-                    App.Locator.ProfilePage.ProfileName = ProfileName;
-                    App.Locator.ProfilePage.PhoneNumber = PhoneNumber;
-
-                    App.Locator.MainMenuMaster.UserName = ProfileName;
-                    await ShowAlert("Profile Updated Successfully");
-                    await App.Current.MainPage.Navigation.PopModalAsync();
-                }
-                else
-                {
-                    await ShowAlert("Profile doesn't Updated Successfully");
-                }
-            }
-            catch
-            {
-                await ShowAlert("Internal server error");
-            }
-            
+            await App.Current.MainPage.Navigation.PopModalAsync();
         });
 
         public async void InitializeUserInfo(Customer customer)
         {
             try
             {
-                ProfileName = customer.firstName + " " + customer.lastName;
-            }
-            catch
-            {
+
+              
+                string queryid_id = @"mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
+                          customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
+                            customer {
+                              id
+                            }
+                            customerAccessToken {
+                              accessToken
+                              expiresAt
+                            }
+                            customerUserErrors {
+                              code
+                              field
+                              message
+                            }
+                          }
+                        }";
+                CustomerUpdateRequest request = new CustomerUpdateRequest();
+                request.customer = new UpdateCustomer();
+                if(ProfileName.Contains(" "))
+                {
+                    request.customer.firstName = ProfileName.Split(' ')[0];
+                    request.customer.lastName = ProfileName.Split(' ')[1];
+                }
+                else
+                {
+                    request.customer.firstName = ProfileName;
+                    request.customer.lastName = string.Empty;
+                }
+                request.customer.email = ProfileEmail;
+                request.customer.phone = PhoneNumber;
+
+                var res = await _apiService.CustomerUpdate(queryid_id, request);
+
+                if (res.data != null)
+                {
+                }
+                else
+                {
+                    //UserDialogs.Instance.Alert("Server not connected", "Error", "Ok");
+                }
 
             }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.Alert(ex.Message.ToString());
+            }
+            UserDialogs.Instance.HideLoading();
         }
     }
     public static class ImageHelper

@@ -102,11 +102,11 @@ namespace IMark.Areas.Authentication.ViewModels
             set
             {
                 _password = value;
-                if (RegexUtilities.PasswordValidation(_password))
-                    IsPasswordErrorVisible = false;
-                else
-                    IsPasswordErrorVisible = true;
-                CheckValidation();
+                //if (RegexUtilities.PasswordValidation(_password))
+                //    IsPasswordErrorVisible = false;
+                //else
+                //    IsPasswordErrorVisible = true;
+                //CheckValidation();
                 RaisePropertyChanged(nameof(Password));
             }
         }
@@ -116,14 +116,14 @@ namespace IMark.Areas.Authentication.ViewModels
                 IsPasswordErrorVisible
                )
             {
-                IsSignInButtonEnabled = false;
+                IsSignInButtonEnabled = true;
                 return false;
             }
             else if (string.IsNullOrEmpty(Password) ||
                 string.IsNullOrEmpty(Email)
                 )
             {
-                IsSignInButtonEnabled = false;
+                IsSignInButtonEnabled = true;
                 return false;
             }
             else
@@ -175,7 +175,7 @@ namespace IMark.Areas.Authentication.ViewModels
 
         public ICommand ForgotPassword => new Command(async(obj) =>
         {            
-            await App.Current.MainPage.Navigation.PushModalAsync(new ForgetPasswordPage());
+            await App.Current.MainPage.Navigation.PushAsync(new ForgetPasswordPage());
            // UserDialogs.Instance.Alert("In progress");
         });
         public ICommand SigninCommand => new Command(async (obj) =>

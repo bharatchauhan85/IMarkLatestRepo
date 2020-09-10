@@ -122,7 +122,7 @@ namespace IMark.Areas.ViewModels
 				string accestoken = Convert.ToString(SettingExtension.AccessToken);
 				char quote = '"';
 				string modifiedString = quote + accestoken + quote;
-				string query = @"{customer(customerAccessToken: " + modifiedString + "){ id firstName lastName email phone createdAt lastIncompleteCheckout{id createdAt webUrl lineItems(first: 5){ edges{ node{quantity id title variant{ id price selectedOptions{name value}  image{ id originalSrc}}}}}}addresses(first: 3){edges{ node{ id firstName lastName address1 address2 city company country	}}}orders(first: 3){edges{node{id orderNumber name email lineItems(first: 3){ edges{ node{quantity variant{ id image{ originalSrc}}}}}}}}}}";
+				string query = @"{customer(customerAccessToken: " + modifiedString + "){ id firstName lastName email createdAt lastIncompleteCheckout{id createdAt webUrl lineItems(first: 5){ edges{ node{quantity id title variant{ id price selectedOptions{name value}  image{ id originalSrc}}}}}}addresses(first: 3){edges{ node{ id firstName lastName address1 address2 city company country	}}}orders(first: 3){edges{node{id orderNumber name email lineItems(first: 3){ edges{ node{quantity variant{ id image{ originalSrc}}}}}}}}}}";
 				var result = await _apiService.GetCustomer(query);
 				if (result != null)
 				{ 
@@ -180,9 +180,9 @@ namespace IMark.Areas.ViewModels
 			SettingExtension.CheckoutId = "";
 			SettingExtension.CartList = null;
 			SettingExtension.CustomizeURLS = null;
-			await App.Locator.CartPage.InitilizeData();
-			await App.Current.MainPage.Navigation.PushModalAsync(new MainMenu());
-
+			 await App.Locator.CartPage.InitilizeData();
+			App.Current.MainPage = new NavigationPage(new MainMenu());
+			
 		});
 
         

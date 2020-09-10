@@ -16,14 +16,13 @@
     <Grid
         Margin="20"
         Padding="10"
+        RowDefinitions="50,*,50"
         BackgroundColor="White"
-        RowDefinitions="Auto,*"
         VerticalOptions="CenterAndExpand">
-        <Label
+        <Entry
             x:Name="EmojiEntry"
-            FontSize="25"
-            LineBreakMode="CharacterWrap" />
-        <CollectionView x:Name="EmojiCollection">
+            FontSize="25"/>
+        <CollectionView Grid.Row="1" SelectionMode="Single" SelectionChanged="EmojiCollection_SelectionChanged" x:Name="EmojiCollection">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="10" />
             </CollectionView.ItemsLayout>
@@ -37,5 +36,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="OK" Grid.Row="2" Clicked="Button_Clicked"/>
     </Grid>
 </rgPages:PopupPage>

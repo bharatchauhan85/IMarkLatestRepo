@@ -19,7 +19,7 @@ namespace IMark.Areas.ViewModels
     {
         IApiService _apiService;
         List<ProductsEdge> _productsEdge;
-        private ProductModel _catagoriesByListData;
+        
         private string _catagoriesData;
         public string CatagoriesData
         {
@@ -35,11 +35,11 @@ namespace IMark.Areas.ViewModels
 
        
 
-        private ObservableCollection<Products> _catagoriesList;
-        public ObservableCollection<Products> CatagoriesList
+        private List<Products> _catagoriesList;
+        public List<Products> CatagoriesList
         {
             get { return _catagoriesList; }
-            set { _catagoriesList = value; RaisePropertyChanged(nameof(CatagoriesList)); }
+            set { _catagoriesList = value; RaisePropertyChanged(); }
         }
 
         public async Task Init(ProductModel catagoriesByListData)
@@ -56,10 +56,8 @@ namespace IMark.Areas.ViewModels
             //    UserDialogs.Instance.HideLoading();
             //    UserDialogs.Instance.Alert(ex.Message.ToString());
             //}
-            _condition = string.Empty;
-            _name = string.Empty;
+
             UserDialogs.Instance.ShowLoading();
-            _catagoriesByListData = catagoriesByListData;
             try
             {
                 char quote = '"';
@@ -69,7 +67,7 @@ namespace IMark.Areas.ViewModels
                 var res = await _apiService.GetProductType(queryid_id);
                 if (res != null)
                 {
-                    CatagoriesList = new ObservableCollection<Products>();
+                    CatagoriesList = new List<Products>();
                     CatagoriesList.Add(res.Data.Shop.Products);
                     CatagoriesData = catagoriesByListData.Tag;
                 }
@@ -102,19 +100,16 @@ namespace IMark.Areas.ViewModels
 
         private async void GetCollection(string afterData)
         {
-            string type = CatagoriesData;
+            if (CatagoriesData == "New Arrivals")
+            {
+                CatagoriesData = CatagoriesData.Split(' ')[0];
+            }
             char quote = '"';
-            string modifiedCollectionName = quote + type + quote;
+            string modifiedCollectionName = quote + CatagoriesData + quote;
             string modifiedAfterCursor = quote + afterData + quote;
             try
             {
-                string queryid_id;
-                if (string.IsNullOrEmpty(_condition) && string.IsNullOrEmpty(_name))
-                    queryid_id = "{shop{products(first: 5 after:" + modifiedAfterCursor + "," + "query:" + modifiedCollectionName + "){pageInfo { hasNextPage hasPreviousPage }edges{cursor node{id images(first: 5){ edges {node{ id src}}} title tags productType description variants(first: 50){ edges{ node{ id  available price title selectedOptions{name value} image{ id originalSrc} } } }}}}}}";
-                else
-                    queryid_id = "{shop{products(first: 5 after:" + modifiedAfterCursor + "," + "query:" + modifiedCollectionName + "," + "sortKey:" + _name + "," + "reverse: " + _condition + "){pageInfo { hasNextPage hasPreviousPage }edges{cursor node{id images(first: 5){ edges {node{ id src}}} title tags productType description variants(first: 50){ edges{ node{ id  available price title selectedOptions{name value} image{ id originalSrc} } } }}}}}}";
-
-
+                string queryid_id = "{shop {name collectionByHandle(handle:" + modifiedCollectionName + ") {title products(first:5 after:" + modifiedAfterCursor + " ) {pageInfo { hasNextPage hasPreviousPage }edges { cursor node {id productType description variants(first: 50){edges{node{id available title selectedOptions{name value} price image{id originalSrc}}}} title}}}}}}";
                 var res = await _apiService.GetProductType(queryid_id);
                 //  UserDialogs.Instance.HideLoading();
                 if (res.Data.Shop.Products != null)
@@ -137,7 +132,7 @@ namespace IMark.Areas.ViewModels
         public ICommand SortCommand => new Command(async (obj) =>
         {
             
-            await App.Locator.SortPage.InitializeData(_catagoriesByListData);
+            await App.Locator.SortPage.InitializeData(_productsEdge);
             await App.Current.MainPage.Navigation.PushModalAsync(new SortPage());
         });
 
@@ -158,17 +153,15 @@ namespace IMark.Areas.ViewModels
             CatagoriesList.Add(ConvertShopProductToProductEdge(products));
             RaisePropertyChanged(nameof(CatagoriesList));
         }
-        private string _condition = string.Empty;
-        private string _name = string.Empty;
-        public void InitializeSortData(Products edges, string name, string condition)
+
+        public void InitializeSortData(Products edges)
         {
+            CatagoriesData = edges.Edges[0].Node.ProductType;
+            CatagoriesList = new List<Products>();
             try
             {
-                _condition = condition;
-                _name = name;
-                CatagoriesList = new ObservableCollection<Products>();
+                CatagoriesList = new List<Products>();
                 CatagoriesList.Add(edges);
-                RaisePropertyChanged(nameof(CatagoriesList));
             }
             catch (Exception ex)
             {

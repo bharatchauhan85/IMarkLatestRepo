@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rgPages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:rgAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:rgPages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+                   x:Name="thispage"
+                   xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+                   x:Class="IMark.Areas.PopUp.TextPicker">
+    <rgPages:PopupPage.Animation>
+        <rgAnimations:MoveAnimation
+            DurationIn="500"
+            DurationOut="400"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </rgPages:PopupPage.Animation>
+
+    <Grid
+        Margin="20"
+        Padding="10"
+        RowDefinitions="70,50,*,50"
+        BackgroundColor="White"
+        VerticalOptions="CenterAndExpand">
+        <Entry Grid.ColumnSpan="2"
+            Placeholder="Enter Text"
+              BindingContext="{x:Reference thispage}" TextColor="{Binding SelectedColor}"
+               PlaceholderColor="{Binding SelectedColor}"
+            x:Name="TextEntry" 
+            FontSize="25"/>
+        <Label   Grid.Row="1" FontAttributes="Bold" VerticalOptions="End" Text="Choose a text Color"/>
+        <Grid Grid.Row="2">
+            <!--<CollectionView 
+                SelectionChanged="EmojiCollection_SelectionChanged" 
+                SelectionMode="Single" 
+                x:Name="ColorCollection">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <BoxView
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        BackgroundColor="{Binding .}"
+                        VerticalOptions="Center" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+            <colorpicker:ColorWheel BindingContext="{x:Reference thispage}" SelectedColor="{Binding SelectedColor,Mode=TwoWay}" Grid.Row="0" x:Name="ColorWheel1"
+                                Padding="5"/>
+            <colorpicker:RGBSliders Grid.Row="1" x:Name="RGBSliders1"
+                                ConnectedColorPicker="{x:Reference Name=ColorWheel1}"
+                                Padding="5"/>
+        </Grid>
+        <Label TextColor="Black" Grid.Row="1" FontAttributes="Bold" Grid.Column="1" VerticalOptions="End" Text="Choose a Font Style"/>
+        <CollectionView Grid.Row="2" Grid.Column="1" SelectionChanged="FontCollection_SelectionChanged"
+                        SelectionMode="Single" x:Name="FontCollection">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame>
+                        <Label VerticalOptions="Center" LineBreakMode="TailTruncation"
+                                HorizontalOptions="Center"
+                                FontFamily="{Binding .}"
+                                Text="{Binding .}"/>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="OK" Grid.Row="3" Grid.Column="1" Clicked="Button_Clicked"/>
+        <Button Clicked="Button_Clicked_1" Text="Cancle" Grid.Row="3"/>
+    </Grid>
+</rgPages:PopupPage>

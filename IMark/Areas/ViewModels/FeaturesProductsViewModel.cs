@@ -102,21 +102,16 @@ namespace IMark.Areas.ViewModels
 
         private async void GetCollection(string afterData)
         {
-            string type = CatagoriesDataTitle;
             if (CatagoriesDataTitle == "New Arrivals")
             {
-                type = CatagoriesDataTitle.Split(' ')[0];
-            }
-            if(CatagoriesDataTitle == "Featured Product")
-            {
-                type = "Feat";
+                CatagoriesDataTitle = CatagoriesDataTitle.Split(' ')[0];
             }
             char quote = '"';
-            string modifiedCollectionName = quote + type + quote;
+            string modifiedCollectionName = quote + CatagoriesDataTitle + quote;
             string modifiedAfterCursor = quote + afterData + quote;
             try
             {
-                string queryid_id = "{shop {name collectionByHandle(handle:" + modifiedCollectionName + ") {title products(first:5 after:" + modifiedAfterCursor + " )  { pageInfo { hasNextPage hasPreviousPage } edges { cursor node {id productType description variants(first: 50){edges{node{id available title selectedOptions{name value} price image{id originalSrc}}}} title}}}}}}";
+                string queryid_id = "{shop {name collectionByHandle(handle:" + modifiedCollectionName + ") {title products(first:5 )  { pageInfo { hasNextPage hasPreviousPage } edges { cursor node {id productType description variants(first: 50){edges{node{id available title selectedOptions{name value} price image{id originalSrc}}}} title}}}}}}";
                 var res = await _apiService.GetCollectionList(queryid_id);
                 //  UserDialogs.Instance.HideLoading();
                 if (res.data.shop.collectionByHandle != null)

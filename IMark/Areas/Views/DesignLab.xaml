@@ -10,7 +10,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid HeightRequest="60">
                 <Grid.ColumnDefinitions>
@@ -29,6 +29,10 @@
                     Source="back"
                     VerticalOptions="Center"
                     WidthRequest="40" />
+                <StackLayout Grid.Column="1">
+                    <Image x:Name="MyFrontImage" HeightRequest="60"/>
+                    <Image HeightRequest="60" x:Name="MyBackImage"/>
+                </StackLayout>
                 <Button
                     x:Name="addToCart"
                     Grid.Column="2"
@@ -45,31 +49,41 @@
                     <tt:TouchEffect Capture="True" TouchAction="OnTouchEffectAction" />
                 </Grid.Effects>
             </Grid>
-
-            <ScrollView
-                Grid.Row="2"
+            <StackLayout  Spacing="0" VerticalOptions="Center" Grid.Row="2">
+                <StackLayout IsVisible="False" Margin="10" Spacing="0" x:Name="TextSizeSlider">
+                    <Label Text="{Binding Value,Source={x:Reference MySlider},StringFormat='Size :{0}'}"/>
+                    <Slider HeightRequest="20" x:Name="MySlider" 
+                             ValueChanged="TextSize_ValueChanged" 
+                            VerticalOptions="End"  
+                            Maximum="200"/>
+                </StackLayout>
+                
+                <ScrollView
                 HorizontalScrollBarVisibility="Always"
                 Orientation="Horizontal">
-                <StackLayout Orientation="Horizontal">
-                    <Button Clicked="AddTextBtn_Clicked" Text="Add Text" />
-                    <Button
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="Front" Clicked="Front_Clicked" Text="Front" />
+                        <Button x:Name="Back" Clicked="Back_Clicked" Text="Back" />
+                        <Button Clicked="AddTextBtn_Clicked" Text="Add Text" />
+                        <Button
                         x:Name="AddImgBtn"
                         Clicked="AddImgBtn_Clicked"
                         Text="Add Image" />
-                    <Button
+                        <Button
                         x:Name="EmojiBtn"
                         Clicked="EmojiBtn_Clicked"
                         Text="Add Emoji" />
-                    <Button
+                        <Button
                         x:Name="SaveBtn"
                         Clicked="SaveBtn_Clicked"
                         Text="Save PNG" />
-                    <Button
+                        <Button
                         x:Name="RemoveBtn"
                         Clicked="RemoveBtn_Clicked"
                         Text="Remove" />
-                </StackLayout>
-            </ScrollView>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

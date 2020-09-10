@@ -35,7 +35,7 @@ namespace IMark.Service.Interfaces
         Task<GetProductResponse> SortListOfProduct(string query);
         Task<GetProductResponse> SortListOfCollection(string query);
         Task<UpdateAddressForShippingResponseModel> UpdateShippingAddress(string query, UpdateAddressForShippingRequestModel request);
-        Task<CustomerUpdateResponse> CustomerUpdate(string query, CustomerUpdateRequest request);
+        Task<UpdateAddressForShippingResponseModel> CustomerUpdate(string query, CustomerUpdateRequest request);
         //   Task<CollectionResponse> GetCollection(string query);
         //Task<OrderResponse> GetOrders(, string UserPassword);
     }

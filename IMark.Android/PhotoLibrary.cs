@@ -71,6 +71,7 @@ namespace SkiaSharpFormsDemos.Droid
                                                     new string[] { bitmapFile.Path },
                                                     new string[] { "image/png", "image/jpeg" }, null);
                     UserDialogs.Instance.Toast("File save in :" + bitmapFile.Path);
+                    return true;
                 }
             }
             catch(Exception e)
@@ -79,6 +80,44 @@ namespace SkiaSharpFormsDemos.Droid
             }
 
             return true;
+        }
+        public async Task<ImageSource> SavePhotoAsyncWithImageSource(byte[] data, string folder, string filename)
+        {
+            try
+            {
+                Java.IO.File picturesDirectory = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures);
+                Java.IO.File folderDirectory = picturesDirectory;
+
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    folderDirectory = new Java.IO.File(picturesDirectory, folder);
+                    folderDirectory.Mkdirs();
+                }
+
+                using (Java.IO.File bitmapFile = new Java.IO.File(folderDirectory, filename))
+                {
+                    bitmapFile.CreateNewFile();
+
+                    using (FileOutputStream outputStream = new FileOutputStream(bitmapFile))
+                    {
+                        await outputStream.WriteAsync(data);
+                    }
+
+                    // Make sure it shows up in the Photos gallery promptly.
+                    MediaScannerConnection.ScanFile(MainActivity.Instance,
+                                                    new string[] { bitmapFile.Path },
+                                                    new string[] { "image/png", "image/jpeg" }, null);
+                    UserDialogs.Instance.Toast("File save in :" + bitmapFile.Path);
+                    var file = System.IO.File.OpenRead(bitmapFile.Path);
+                    //var mStr = new MemoryStream();
+                    //file.CopyTo(mStr);
+                    return ImageSource.FromStream(() => file);
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<bool> SavePhotoAsync1(byte[] data)

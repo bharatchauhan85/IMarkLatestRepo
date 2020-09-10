@@ -158,9 +158,9 @@ namespace IMark.Service.Services
             var res = await PostAsynGraphql<UpdateAddressForShippingRequestModel, UpdateAddressForShippingResponseModel>(query, request);
             return res;
         }
-        public async Task<CustomerUpdateResponse> CustomerUpdate(string query, CustomerUpdateRequest request)
+        public async Task<UpdateAddressForShippingResponseModel> CustomerUpdate(string query, CustomerUpdateRequest request)
         {
-            var res = await PostAsynGraphql<CustomerUpdateRequest, CustomerUpdateResponse>(query, request);
+            var res = await PostAsynGraphql<CustomerUpdateRequest, UpdateAddressForShippingResponseModel>(query, request);
             return res;
         }
     }

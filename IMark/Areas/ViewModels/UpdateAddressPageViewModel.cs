@@ -311,7 +311,7 @@ namespace IMark.Areas.ViewModels
                     createAddressReequest.address.city = City;
                     createAddressReequest.address.country = Country;
                 createAddressReequest.address.province = Province;
-                createAddressReequest.address.phone = Phone;
+                createAddressReequest.address.phone=
                     createAddressReequest.address.zip = PostalCode;
                     string query = @"mutation customerAddressUpdate($customerAccessToken: String!, $id: ID!, $address: MailingAddressInput!) {
                                   customerAddressUpdate(customerAccessToken: $customerAccessToken, id: $id, address: $address) {

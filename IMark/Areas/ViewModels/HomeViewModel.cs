@@ -269,10 +269,10 @@ namespace IMark.Areas.ViewModels
           });
         public ICommand FeaturedProductCommand => new Command(async (obj) =>
         {
-            var NewArrivalDetailsData = obj as CollectionListEdge;
-            await App.Locator.ProductDetailsPage.InitializeCollection(NewArrivalDetailsData);
+            var NewArrivalDetailsData = obj as ProductsEdge;
+            await App.Locator.ProductDetailsPage.InitializeData(NewArrivalDetailsData);
             //var NewArrivalDetailsData = obj as NewArrivalModel;
-           await App.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsPage());
+           await App.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsPage(NewArrivalDetailsData));
 
         });
         public Command SeeAllProduct

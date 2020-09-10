@@ -69,7 +69,7 @@
                     <Entry
                         Margin="20,0"
                         FontSize="18"
-                        HorizontalOptions="Fill"
+                        HorizontalOptions="Start"
                         Style="{StaticResource DefaultLabelStyle2}"
                         Text="{Binding ProfileName}"
                         VerticalOptions="CenterAndExpand" />
@@ -78,7 +78,6 @@
                         Margin="20,0"
                         FontSize="18"
                         HorizontalOptions="Start"
-                        IsEnabled="False"
                         Style="{StaticResource DefaultLabelStyle2}"
                         Text="{Binding ProfileEmail}"
                         VerticalOptions="CenterAndExpand" />
@@ -95,7 +94,6 @@
                         Margin="20,0"
                         FontSize="18"
                         HorizontalOptions="Start"
-                        IsVisible="false"
                         Style="{StaticResource DefaultLabelStyle2}"
                         Text="{Binding Password}"
                         VerticalOptions="CenterAndExpand" />

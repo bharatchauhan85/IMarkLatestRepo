@@ -16,7 +16,7 @@ namespace IMark.Areas.ViewModels
 {
    public class SortPageViewModel:BasePageViewModel
     {
-        private ProductModel _productsEdge;
+        List<ProductsEdge> _productsEdge;
         List<CollectionEdge> _collectionEdges;
         SortPageModelRequest _sortPageModel;
         IApiService _apiService;
@@ -71,12 +71,12 @@ namespace IMark.Areas.ViewModels
                 var name = _sortPageModel.sortKey;
                 var condition = _sortPageModel.Condition.ToString().ToLower();
                 char t = '"';
-                var type = t + _productsEdge.Tag + t;
-                string queryid_id = "{ shop{ products(first: 5, query:" + type + " sortKey:" + name + ",reverse:" + condition + "){ pageInfo { hasNextPage hasPreviousPage } edges{cursor node{id images(first: 5){ edges {node{ id src}}} title productType description variants(first: 50){ edges{ node{ id  available price title selectedOptions{name value} image{ id originalSrc} } } }}}}}}";
-                var res = await _apiService.GetProductType(queryid_id);
+                var type = t + _productsEdge[0].Node.ProductType + t;
+                string queryid_id = "{ shop{ products(first: 50, query:" + type + " sortKey:" + name + ",reverse:" + condition + "){edges{node{id images(first: 5){ edges {node{ id src}}} title productType description variants(first: 50){ edges{ node{ id  available price title selectedOptions{name value} image{ id originalSrc} } } }}}}}}";
+                var res = await _apiService.SortListOfProduct(queryid_id);
                 if (res != null)
                 {
-                    App.Locator.CatagoriesByList.InitializeSortData(res.Data.Shop.Products, name, condition);
+                    App.Locator.CatagoriesByList.InitializeSortData(res.Data.Shop.Products);
                     await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else
@@ -195,7 +195,7 @@ namespace IMark.Areas.ViewModels
             return collectionListProducts;
         }
 
-        public async Task InitializeData(ProductModel productsEdge)
+        internal async Task InitializeData(List<ProductsEdge> productsEdge)
         {
             IsCollectionWay = false;
             _productsEdge = productsEdge;

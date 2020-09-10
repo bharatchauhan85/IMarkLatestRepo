@@ -35,25 +35,20 @@ namespace IMark.Areas.ViewModels
             _apiService = apiService;
         }
 
-        public async Task Init(List<CollectionEdge> filterData)
+        internal async Task Init(List<CollectionEdge> filterData)
         {
             _Condition = string.Empty;
             _Name = string.Empty;
             _collectionEdge = filterData;
             UserDialogs.Instance.ShowLoading();
             CatagoriesData = _collectionEdge[0].node.title;
-            string type = CatagoriesData;
             if (CatagoriesData == "New Arrivals")
             {
-                type = CatagoriesData.Split(' ')[0];
-            }
-            if (CatagoriesData == "Featured Product")
-            {
-                type = "Feat";
+                CatagoriesData = CatagoriesData.Split(' ')[0];
             }
             CollectionList = new ObservableCollection<CollectionListProducts>();
             char quote = '"';
-            string modifiedCollectionName = quote + type + quote;
+            string modifiedCollectionName = quote + CatagoriesData + quote;
             try
             {
                 CollectionList.Clear();
@@ -102,11 +97,11 @@ namespace IMark.Areas.ViewModels
             string type = CatagoriesData;
             if (CatagoriesData == "New Arrivals")
             {
-                type = CatagoriesData.Split(' ')[0];
+                type = quote + CatagoriesData.Split(' ')[0] + quote;
             }
             if (CatagoriesData == "Featured Product")
             {
-                type = "Feat";
+                type = quote + "Feat" + quote;
             }
             string modifiedCollectionName = quote + type + quote;
             string modifiedAfterCursor = quote + afterData + quote;
@@ -116,7 +111,7 @@ namespace IMark.Areas.ViewModels
                 if (string.IsNullOrEmpty(_Condition) && string.IsNullOrEmpty(_Name))
                     queryid_id = "{shop {name collectionByHandle(handle:" + modifiedCollectionName + ") {title products(first:5 after:" + modifiedAfterCursor + " ) {pageInfo { hasNextPage hasPreviousPage }edges { cursor node {id productType description variants(first: 50){edges{node{id available title selectedOptions{name value} price image{id originalSrc}}}} title}}}}}}";
                 else
-                    queryid_id = "{shop {name collectionByHandle(handle:" + modifiedCollectionName + ") {title products(first:5 after:" + modifiedAfterCursor + "," + "sortKey:" + _Name + "," + "reverse: " + _Condition + " ) {pageInfo { hasNextPage hasPreviousPage }edges { cursor node {id productType description variants(first: 50){edges{node{id available title selectedOptions{name value} price image{id originalSrc}}}} title}}}}}}";
+                    queryid_id = "{shop {name collectionByHandle(handle:" + modifiedCollectionName + ") {title products(first:5," + "sortKey:" + _Name + "," + "reverse: " + _Condition + " ) {pageInfo { hasNextPage hasPreviousPage }edges { cursor node {id productType description variants(first: 50){edges{node{id available title selectedOptions{name value} price image{id originalSrc}}}} title}}}}}}";
                 var res = await _apiService.GetCollectionList(queryid_id);
                 //  UserDialogs.Instance.HideLoading();
                 if (res.data.shop.collectionByHandle != null)

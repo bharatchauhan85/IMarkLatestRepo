@@ -751,14 +751,17 @@ namespace IMark.Areas.ViewModels
             //}
             try
             {
+                 if(SelectedNode==null)
+                {
+                    return;
+                }
                 if (SelectedNode.available)
                     await App.Current.MainPage.Navigation.PushModalAsync(new DesignLab(SelectedNode));
                 else
                     await ShowAlert("This product is not available for customize", string.Empty, "Ok");
             }
-            catch
+            catch (Exception ex)
             {
-                ShowAlert("Inprocess");
             }
         });
         public ICommand SatisfactionCommand => new Command(async (obj) =>
@@ -864,7 +867,7 @@ namespace IMark.Areas.ViewModels
                         }
                         ";
                         var res1 = await _apiService.CheckOutData(queryId, request);
-                        if (res1.data.checkoutCreate.checkoutUserErrors.Count>0)
+                        if (string.IsNullOrEmpty(res1.data.checkoutCreate.checkout.id))
                         {
 
                             await ShowAlert(res1.data.checkoutCreate.checkoutUserErrors[0].message);
@@ -1004,10 +1007,9 @@ namespace IMark.Areas.ViewModels
                         }
                         ";
                         var res1 = await _apiService.CheckOutData(queryId, request);
-                        if (res1.data.checkoutCreate.checkoutUserErrors.Count > 0)
+                        if (string.IsNullOrEmpty(res1.data.checkoutCreate.checkout.id))
                         {
-
-                            await ShowAlert(res1.data.checkoutCreate.checkoutUserErrors[0].message);
+                            await ShowAlert("Checkout not created");
                         }
                         else
                         {

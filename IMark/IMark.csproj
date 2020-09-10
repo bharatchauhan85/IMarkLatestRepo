@@ -18,6 +18,7 @@
     <Compile Remove="Areas\Views\FullVideoPlayer.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ColorPicker.Xamarin.Forms" Version="1.3.3" />
     <PackageReference Include="GraphQL.Client" Version="3.1.3" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="3.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -49,7 +50,20 @@
     <Folder Include="Extenstions\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\back_tshir.png" />
     <EmbeddedResource Include="Resources\Back_tShirt.png" />
+    <EmbeddedResource Include="Resources\Fonts\CoventryGardenNF.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\FancyPantsNF.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\FontleroyBrownNF.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\LittleLordFontleroyNF.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\ParkLaneNF.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Precious.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Quicksand-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Quicksand-Light.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Quicksand-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Quicksand-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\RhumbaScriptNF.ttf" />
+    <EmbeddedResource Include="Resources\transparent_download.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Areas\Authentication\Views\ForgetPasswordPage.xaml">
@@ -62,6 +76,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Areas\PopUp\SuccessPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\PopUp\TextPicker.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Areas\Views\AccountSettinPage.xaml">
@@ -183,6 +200,19 @@
     <ProjectReference Include="..\IMark.Core\IMark.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\back_tshir.png" />
     <None Remove="Resources\Back_tShirt.png" />
+    <None Remove="Resources\Fonts\CoventryGardenNF.ttf" />
+    <None Remove="Resources\Fonts\FancyPantsNF.ttf" />
+    <None Remove="Resources\Fonts\FontleroyBrownNF.ttf" />
+    <None Remove="Resources\Fonts\LittleLordFontleroyNF.ttf" />
+    <None Remove="Resources\Fonts\ParkLaneNF.ttf" />
+    <None Remove="Resources\Fonts\Precious.ttf" />
+    <None Remove="Resources\Fonts\Quicksand-Bold.ttf" />
+    <None Remove="Resources\Fonts\Quicksand-Light.ttf" />
+    <None Remove="Resources\Fonts\Quicksand-Medium.ttf" />
+    <None Remove="Resources\Fonts\Quicksand-Regular.ttf" />
+    <None Remove="Resources\Fonts\RhumbaScriptNF.ttf" />
+    <None Remove="Resources\transparent_download.png" />
   </ItemGroup>
 </Project>
