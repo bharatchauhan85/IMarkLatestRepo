@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls="clr-namespace:IMark.Controls"
+             ios:Page.UseSafeArea="true" BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+             material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}" 
+             mc:Ignorable="d" x:Name="thispage" NavigationPage.HasNavigationBar="False"
+             x:Class="IMark.Areas.Views.BecomeDistributor">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" RowDefinitions="60,*">
+            <StackLayout Margin="0,0,0,5" 
+                Orientation="Vertical">
+                <Grid Margin="5,0" ColumnDefinitions="1*,9*">
+                    <ImageButton Source="back" Padding="0" Margin="10" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="24" WidthRequest="24"   Command="{Binding GetBackCommand }"/>
+                    <Label Grid.Column="1" Text="Become A Distributor" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}" FontSize="18"/>
+                </Grid>
+                <BoxView Style="{StaticResource BoxViewStyle}"/>
+            </StackLayout>
+
+
+            <Grid Grid.Row="1">
+                <StackLayout>
+                    <StackLayout  Orientation="Vertical" Spacing="1" Margin="0,10">
+                        <Label Text="Subscribe" FontSize="20"  VerticalOptions="Center" HorizontalOptions="Center" Style="{DynamicResource DefaultLabelStyle}" Margin="20,0,20,0"/>
+                        <Label Text="Sign up to become a distributor of our high demand iMASK and other products" Style="{DynamicResource DefaultLabelStyle2}" FontSize="14"  HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="10,0,10,10"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Frame Padding="6" Margin="10,5,10,0" BackgroundColor="WhiteSmoke" HasShadow="False" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry                          
+                             Style="{DynamicResource DefaultEntryStyle }" FontFamily="{DynamicResource QuicksandMediumFont}" Keyboard="Email"
+                              HorizontalOptions="FillAndExpand"  Margin="20,0,10,0" Placeholder="Email Address" Text="{Binding Email}" />
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout>
+                        <Button Text="Distributor Signup" Margin="10,20,10,0" BackgroundColor="#E0333E" Style="{DynamicResource DefaultButtonStyle2}" Command="{Binding DonedisCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Margin="0,0,0,10"
+                HeightRequest="50"
+                Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton
+                        Margin="10"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding IsPresentTrueCommand2}"
+                        HeightRequest="24"
+                        HorizontalOptions="Start"
+                        Source="hamberger"
+                        VerticalOptions="Center"
+                        WidthRequest="24" />
+                    <Label
+                        Margin="5,0"
+                        FontSize="20"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Profile"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout>
+                    <controls:CircleImage
+                        Margin="0,5"
+                        Aspect="AspectFill"
+                        BorderColor="White"
+                        BorderThickness="2"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        Source="{Binding ProfileImageSource}"
+                        VerticalOptions="Center"
+                        WidthRequest="100" />
+                    <Label
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding ProfileName}"
+                        VerticalOptions="CenterAndExpand" />
+                    <Label
+                        FontSize="15"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding ProfileEmail}"
+                        VerticalOptions="CenterAndExpand" />
+                    <Label
+                        FontSize="15"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding PhoneNumber}"
+                        VerticalOptions="CenterAndExpand" />
+                    <BoxView Margin="0,20,0,0" Style="{StaticResource BoxViewStyle}" />
+                    <Grid Margin="20,4">
+                        <Label
+                            Margin="0,5"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DefaultLabelStyle}"
+                            Text="Account Setting"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            Grid.Column="1"
+                            HeightRequest="16"
+                            HorizontalOptions="End"
+                            Source="chevronright"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AccountSettingCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+
+                    <Grid Margin="20,0">
+                        <Label
+                            Margin="0,5"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DefaultLabelStyle}"
+                            Text="Saved Address"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            Grid.Column="1"
+                            HeightRequest="16"
+                            HorizontalOptions="End"
+                            Source="chevronright"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveAddressCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+
+                    <Grid Margin="20,0">
+                        <Label
+                            Margin="0,5"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DefaultLabelStyle}"
+                            Text="My Orders"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            Grid.Column="1"
+                            HeightRequest="16"
+                            HorizontalOptions="End"
+                            Source="chevronright"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyOrderCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                    <Grid Margin="20,0">
+                        <Label
+                            Margin="0,5"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DefaultLabelStyle}"
+                            Text="My Favorites"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            Grid.Column="1"
+                            HeightRequest="16"
+                            HorizontalOptions="End"
+                            Source="chevronright"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyFavoritsCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

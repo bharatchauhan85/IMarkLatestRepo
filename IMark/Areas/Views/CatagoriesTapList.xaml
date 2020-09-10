@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.CatagoriesTapList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid RowDefinitions="60,Auto,*" RowSpacing="0">
+            <StackLayout Margin="0,0,0,5" Orientation="Vertical">
+                <Grid Margin="5,0" ColumnDefinitions="1*,7*,2*">
+                    <ImageButton
+                        Margin="5"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GetBackCommand}"
+                        HeightRequest="24"
+                        HorizontalOptions="Start"
+                        Source="back"
+                        VerticalOptions="Center"
+                        WidthRequest="24" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="1"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding CatagoriesData}"
+                        VerticalOptions="CenterAndExpand" />
+                    <ImageButton
+                        Grid.Column="2"
+                        Margin="5,0,10,0"
+                        Aspect="Fill"
+                        BackgroundColor="Transparent"
+                        Command="{Binding CartCommand}"
+                        HeightRequest="20"
+                        HorizontalOptions="End"
+                        Source="card"
+                        VerticalOptions="Center"
+                        WidthRequest="20" />
+                </Grid>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Margin="8,10,8,0">
+                <Frame
+                    Margin="0,2,0,0"
+                    BorderColor="#f2f2f2"
+                    HeightRequest="46"
+                    HorizontalOptions="End"
+                    Style="{StaticResource FrameStyle1}"
+                    VerticalOptions="Center"
+                    WidthRequest="100">
+                    <Grid>
+                        <Image
+                            Margin="10,0,0,0"
+                            HeightRequest="18"
+                            HorizontalOptions="Start"
+                            Source="sort"
+                            VerticalOptions="Center"
+                            WidthRequest="18" />
+                        <Label
+                            Margin="10,0,0,0"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource DefaultLabelStyle2}"
+                            Text="Sort"
+                            VerticalOptions="CenterAndExpand" />
+                        <BoxView
+                            BackgroundColor="#f2f2f2"
+                            HorizontalOptions="End"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="1" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+
+            <Grid Grid.Row="2" Margin="8">
+                <CollectionView
+                    Margin="0,12"
+                    HorizontalScrollBarVisibility="Never"
+                    ItemsSource="{Binding CatagoriesList}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            HorizontalItemSpacing="10"
+                            Orientation="Vertical"
+                            Span="2"
+                            VerticalItemSpacing="20" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Grid>
+                                    <Grid>
+                                        <StackLayout>
+                                            <Frame
+                                                BackgroundColor="White"
+                                                BorderColor="Transparent"
+                                                HasShadow="False"
+                                                HeightRequest="200"
+                                                Style="{StaticResource FrameStyle}">
+                                                <forms:CachedImage
+                                                    Aspect="Fill"
+                                                    ErrorPlaceholder="LoadIcon"
+                                                    LoadingPlaceholder="LoadIcon"
+                                                    Source="{Binding Node.Images.Edges[0].Node.Src}" />
+                                            </Frame>
+                                            <StackLayout>
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="2"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding Node.Title}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Grid ColumnDefinitions="4*,6*">
+                                                    <StackLayout
+                                                        Grid.Column="0"
+                                                        HorizontalOptions="Center"
+                                                        Orientation="Horizontal"
+                                                        Spacing="2">
+                                                        <Image
+                                                            HeightRequest="10"
+                                                            Source="{Binding star1}"
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="10" />
+                                                        <Image
+                                                            HeightRequest="10"
+                                                            Source="{Binding star2}"
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="10" />
+                                                        <Image
+                                                            HeightRequest="10"
+                                                            Source="{Binding star3}"
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="10" />
+                                                        <Image
+                                                            HeightRequest="10"
+                                                            Source="{Binding star4}"
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="10" />
+                                                        <Image
+                                                            HeightRequest="10"
+                                                            Source="{Binding star5}"
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="10" />
+                                                    </StackLayout>
+                                                    <Grid
+                                                        Grid.Column="1"
+                                                        Margin="0,0"
+                                                        ColumnDefinitions="3*,*"
+                                                        ColumnSpacing="1">
+                                                        <Label
+                                                            FontSize="11"
+                                                            HorizontalOptions="End"
+                                                            Style="{DynamicResource DefaultLabelStyle}"
+                                                            Text="{Binding Node.Variants.Edges[0].Node.price}"
+                                                            TextColor="Red"
+                                                            TextType="Text"
+                                                            VerticalOptions="Center" />
+
+                                                    </Grid>
+                                                </Grid>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <!--<Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.ProductCommand, Source={x:Reference thispage}}" />
+                                        </Grid.GestureRecognizers>-->
+                                    </Grid>
+
+                                </Grid>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.CatagoriesTapListCommand, Source={x:Reference thispage}}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>    

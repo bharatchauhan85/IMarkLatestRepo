@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.AddPhoto"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Controls="clr-namespace:IMark.Controls"
+    xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="0,15,0,0" BackgroundColor="White">
+                <Grid HeightRequest="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="5.8*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GetBackCommand}"
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        Source="back"
+                        VerticalOptions="Center"
+                        WidthRequest="20" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="20"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Add Photo"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        FontSize="18"
+                        HorizontalOptions="End"
+                        Text="Undo"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <ImageButton
+                        Grid.Column="3"
+                        Margin="5,0,5,0"
+                        Aspect="Fill"
+                        BackgroundColor="Transparent"
+                        Command="{Binding UndoCommand}"
+                        HeightRequest="23"
+                        HorizontalOptions="Start"
+                        Source="undo"
+                        VerticalOptions="Center"
+                        WidthRequest="23" />
+                </Grid>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Vertical">
+                    <Image
+                        HeightRequest="350"
+                        HorizontalOptions="Center"
+                        Source="character"
+                        VerticalOptions="Center" />
+                    <Image Source="uploadphoto" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        Text="Upload Photo"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text="Upload jpeg,png,bmp files only"
+                        TextColor="LightGray"
+                        VerticalOptions="Center" />
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                    <Label
+                        Margin="15,10,10,1"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        Text="Image Target"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <StackLayout>
+                        <Grid>
+                            <StackLayout Orientation="Horizontal">
+                                <Frame
+                                    Margin="10,0,0,0"
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="110">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Front"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                                <Frame
+                                    Margin="0,0,0,0"
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="110">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Back"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                            </StackLayout>
+
+                        </Grid>
+                        <Label
+                            Margin="15,20,0,0"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Image Position"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                        <ScrollView Orientation="Horizontal">
+                            <StackLayout Margin="0,5" Orientation="Horizontal">
+                                <Frame
+                                    Margin="10,0,0,0"
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="110">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Top left"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="110">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Top right"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="110">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Center"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="125">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Buttom left"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                                <Frame
+                                    Margin="0,0,10,0"
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="LightGray"
+                                    HeightRequest="30"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="130">
+                                    <Label
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Buttom right"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                            </StackLayout>
+                        </ScrollView>
+
+                        <StackLayout HeightRequest="70" Orientation="Vertical">
+                            <Frame
+                                Margin="10,0,250,0"
+                                Padding="0"
+                                BackgroundColor="Gray"
+                                HeightRequest="30"
+                                HorizontalOptions="Start"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="70">
+                                <Label
+                                    FontSize="12"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Custom"
+                                    TextColor="White"
+                                    VerticalOptions="Center" />
+                            </Frame>
+                        </StackLayout>
+                        <Button
+                            Margin="10"
+                            BackgroundColor="#E0333E"
+                            Command="{Binding DoneCommand}"
+                            Style="{DynamicResource DefaultButtonStyle2}"
+                            Text="Done" />
+                    </StackLayout>
+                </StackLayout>
+
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

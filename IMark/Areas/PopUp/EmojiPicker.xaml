@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<rgPages:PopupPage
+    x:Class="IMark.Areas.PopUp.EmojiPicker"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:rgAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:rgPages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+    <rgPages:PopupPage.Animation>
+        <rgAnimations:MoveAnimation
+            DurationIn="500"
+            DurationOut="400"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </rgPages:PopupPage.Animation>
+
+    <Grid
+        Margin="20"
+        Padding="10"
+        BackgroundColor="White"
+        RowDefinitions="Auto,*"
+        VerticalOptions="CenterAndExpand">
+        <Label
+            x:Name="EmojiEntry"
+            FontSize="25"
+            LineBreakMode="CharacterWrap" />
+        <CollectionView x:Name="EmojiCollection">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        Text="{Binding .}"
+                        VerticalOptions="Center" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</rgPages:PopupPage>

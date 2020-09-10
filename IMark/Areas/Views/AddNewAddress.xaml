@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.AddNewAddress"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Margin="0,0,0,5"
+                HeightRequest="60"
+                Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton
+                        Margin="10"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GetBackCommand}"
+                        HeightRequest="24"
+                        HorizontalOptions="Start"
+                        Source="back"
+                        VerticalOptions="Center"
+                        WidthRequest="24" />
+                    <Label
+                        Margin="5,0"
+                        FontSize="20"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Add new address"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout Margin="20,0">
+                    <StackLayout Margin="0,20" Orientation="Vertical">
+
+                        <!--<Frame Padding="6" Margin="0,5" BorderColor="Gray" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry Margin="20,0,10,0" Text="{Binding Name}" Placeholder="Name" Style="{DynamicResource DefaultEntryStyle }" TextColor="#4B4B4B" PlaceholderColor="#4B4B4B" FontFamily="{DynamicResource QuicksandBoldFont}" HorizontalOptions="FillAndExpand"  />
+                        </Frame>
+                        <Frame Padding="6" Margin="0,5" BorderColor="Gray" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry Margin="20,0,10,0" Text="{Binding MobileNumber}" Placeholder="Mobile Number" Style="{DynamicResource DefaultEntryStyle }" TextColor="#4B4B4B" PlaceholderColor="#4B4B4B" FontFamily="{DynamicResource QuicksandBoldFont}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"  />
+                        </Frame>
+                        <Frame Padding="6" Margin="0,5" BorderColor="Gray" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry Margin="20,0,10,0" Text="{Binding Address}" Placeholder="Address" Style="{DynamicResource DefaultEntryStyle }" TextColor="#4B4B4B" PlaceholderColor="#4B4B4B" FontFamily="{DynamicResource QuicksandBoldFont}" HorizontalOptions="FillAndExpand"  />
+                        </Frame>
+                        <Frame Padding="6" Margin="0,5" BorderColor="Gray" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry Margin="20,0,10,0" Text="{Binding Organization}" Placeholder="Organization" Style="{DynamicResource DefaultEntryStyle }" TextColor="#4B4B4B" PlaceholderColor="#4B4B4B" FontFamily="{DynamicResource QuicksandBoldFont}" HorizontalOptions="FillAndExpand"  />
+                        </Frame>
+                        <Frame Padding="6" Margin="0,5" BorderColor="Gray" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry Margin="20,0,10,0" Text="{Binding Street}" Placeholder="Street" Style="{DynamicResource DefaultEntryStyle }" TextColor="#4B4B4B" PlaceholderColor="#4B4B4B" FontFamily="{DynamicResource QuicksandBoldFont}" HorizontalOptions="FillAndExpand"  />
+                        </Frame>
+                        <Frame Padding="6" Margin="0,5" BorderColor="Gray" Style="{DynamicResource FrameStyle}" HeightRequest="38">
+                            <controls:BorderlessEntry Margin="20,0,10,0" Text="{Binding City}" Placeholder="City" Style="{DynamicResource DefaultEntryStyle }" TextColor="#4B4B4B" PlaceholderColor="#4B4B4B" FontFamily="{DynamicResource QuicksandBoldFont}" HorizontalOptions="FillAndExpand"  />
+                        </Frame>-->
+
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="First Name"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding FirstName}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsFirstNameErrorVisible}"
+                            Text="Please Enter FirstName"
+                            TextColor="Red" />
+
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Last Name"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding LastName}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsLastNameErrorVisible}"
+                            Text="Please Enter LastName"
+                            TextColor="Red" />
+                        <!--<Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric"
+                                Placeholder="Mobile Number"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding MobileNumber}"
+                                TextColor="Gray" />
+                        </Frame>-->
+                        <!--<Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Email"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding Email}"
+                                TextColor="Gray" />
+                        </Frame>-->
+
+                        <!--<Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Apt, Unit, Suit,etc(Optional)"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding Option}"
+                                TextColor="Gray" />
+                        </Frame>-->
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Address"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding Address1}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsAddressErrorVisible}"
+                            Text="Please Enter Address"
+                            TextColor="Red" />
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Address"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding Address2}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Country"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding Country}"
+                                TextColor="#2D2D31" />
+                            <!--<Grid Margin="10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="9*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                    <controls:AppPicker
+                                        x:Name="Countrypicker"  FontFamily="{StaticResource QuicksandBoldFont}" Title="Choose Country" FontSize="16" HorizontalOptions="Start"
+                                        TextColor="Black" TitleColor="Black" FontAttributes="Bold"
+                                        VerticalOptions="Center">
+                                        <controls:AppPicker.ItemsSource>
+                                            <x:Array Type="{x:Type x:String}">
+                                            <x:String>Armenia</x:String>
+                                            <x:String>Andorra</x:String>
+                                            </x:Array>
+                                        </controls:AppPicker.ItemsSource>
+                                    </controls:AppPicker>
+                                <Image Grid.Column="1" Source="LinerDrowndrown" VerticalOptions="Center"  HorizontalOptions="End" HeightRequest="13" WidthRequest="13"/>
+                            </Grid>-->
+                            <!--<Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>-->
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsCountryErrorVisible}"
+                            Text="Please Enter Valid Country Name"
+                            TextColor="Red" />
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric"
+                                MaxLength="6"
+                                Placeholder="Postal/Zip"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding PostalCode}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsPostalCodeErrorVisible}"
+                            Text="Please Enter Zip Code"
+                            TextColor="Red" />
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="City"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding City}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsCityErrorVisible}"
+                            Text="Please Enter City"
+                            TextColor="Red" />
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric"
+                                MaxLength="10"
+                                Placeholder="Phone"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding Phone}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsPhoneErrorVisible}"
+                            Text="Please Enter Phone Number"
+                            TextColor="Red" />
+                        <Frame
+                            Margin="0,5"
+                            Padding="6"
+                            BackgroundColor="#F0EFF5"
+                            BorderColor="#F0EFF5"
+                            HeightRequest="38"
+                            Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry
+                                Margin="20,0,10,0"
+                                FontFamily="{DynamicResource QuicksandBoldFont}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="State"
+                                PlaceholderColor="Gray"
+                                Style="{DynamicResource DefaultEntryStyle}"
+                                Text="{Binding State}"
+                                TextColor="#2D2D31" />
+                        </Frame>
+                        <Label
+                            FontSize="12"
+                            IsVisible="{Binding IsStateErrorVisible}"
+                            Text="Please Enter Your State"
+                            TextColor="Red" />
+                    </StackLayout>
+                    <StackLayout Margin="0,20">
+                        <Button
+                            Command="{Binding SavedCommand}"
+                            IsEnabled="{Binding IsSavedButtonEnabled}"
+                            Style="{DynamicResource DefaultButtonStyle}"
+                            Text="Saved" />
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

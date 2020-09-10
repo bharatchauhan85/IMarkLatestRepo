@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"  x:Name="thispage"  xmlns:translate="clr-namespace:IMark.Resources"
+             NavigationPage.HasNavigationBar="False"
+             material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+             BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+             x:Class="IMark.Areas.Views.Customization">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Grid HeightRequest="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.4*"/>
+                        <ColumnDefinition Width="5.8*"/>
+                        <ColumnDefinition Width="1.4*"/>
+                        <ColumnDefinition Width="1.4*"/>
+                    </Grid.ColumnDefinitions> 
+                    <ImageButton Source="back" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="20" Command="{Binding GetBackCommand}" BackgroundColor="Transparent"/>
+                    <Label Grid.Column="1" Text="Customization" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" FontSize="20" FontAttributes="Bold"/>
+                </Grid>
+                <BoxView Style="{StaticResource BoxViewStyle}"/>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Margin="5">
+                        <Image Source="character" Aspect="AspectFit" HeightRequest="340"  VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </StackLayout>
+                    <Grid RowDefinitions="5*,*" RowSpacing="0" HorizontalOptions="CenterAndExpand" HeightRequest="150" Margin="10,30">
+ 
+                        <Image Grid.Column="0" Source="UploadPicture"  VerticalOptions="End" HorizontalOptions="Center" />
+                        <Label Grid.Row="1" Grid.Column="0" Text="Upload Picture" TextColor="Black" FontSize="16" VerticalOptions="Start" HorizontalOptions="Center"/>
+                        <Image Grid.Column="1" Source="AddText"  VerticalOptions="End" HorizontalOptions="Center" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="Add Text" TextColor="Black" FontSize="16" VerticalOptions="Start" HorizontalOptions="Center"/>
+ 
+                        <ImageButton BackgroundColor="Transparent"  Grid.Column="0" Source="UploadPicture"  VerticalOptions="End" HorizontalOptions="Center" Command="{Binding UploadPictureCommand}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="Upload Picture" TextColor="Black" FontSize="16" VerticalOptions="Start" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UploadPictureCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <ImageButton BackgroundColor="Transparent" Grid.Column="1" Source="AddText"  VerticalOptions="End" HorizontalOptions="Center" Command="{Binding AddTextCommand}"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="Add Text" TextColor="Black" FontSize="16" VerticalOptions="Start" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddTextCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+ 
+                    </Grid>
+                </StackLayout>
+            </ScrollView> 
+           
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

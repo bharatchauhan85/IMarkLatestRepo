@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true" mc:Ignorable="d"  x:Name="thispage"  xmlns:translate="clr-namespace:IMark.Resources"
+             material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+             BackgroundColor="{DynamicResource CommonPageBackgroundColor}" NavigationPage.HasNavigationBar="False"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" xmlns:Controls="clr-namespace:IMark.Controls" xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView" xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView" xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+             x:Class="IMark.Areas.Views.AddPhoto2">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout BackgroundColor="White" Margin="0,15,0,0">
+                <Grid HeightRequest="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="5.8*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Source="back" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="20" Command="{Binding GetBackCommand}" BackgroundColor="Transparent"/>
+                    <Label Grid.Column="1" Text="Add Photo" VerticalOptions="Center" HorizontalOptions="Start" FontSize="20" Style="{StaticResource DefaultLabelStyle}"/>
+                    <Label Grid.Column="2" Text="Undo" VerticalOptions="Center" HorizontalOptions="End" FontSize="18" TextColor="Black"/>
+                    <ImageButton Source="undo" Margin="5,0,5,0" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Start" Aspect="Fill" HeightRequest="23" WidthRequest="23" Command="{Binding UndoCommand}" BackgroundColor="Transparent"/>
+                </Grid>
+                <BoxView Style="{StaticResource BoxViewStyle}"/>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Vertical">
+                    <Image Source="character" HeightRequest="350" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Image Source="logo" WidthRequest="80" VerticalOptions="End" HorizontalOptions="Center"/>
+                    <Label Text="Change Photo" Style="{StaticResource DefaultLabelStyle}" FontSize="16" VerticalOptions="Start" HorizontalOptions="Center" />
+
+                    <BoxView Margin="0,10,0,5" Style="{StaticResource BoxViewStyle}"/>
+                    <Label Text="Image Target" Style="{StaticResource DefaultLabelStyle2}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start" Margin="15,10,10,0"/>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" >
+                            <Frame Margin="10,0,0,0" Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="110" BorderColor="LightGray" BackgroundColor="Red">
+                                <Label Text="Front" TextColor="White" Style="{StaticResource DefaultLabelStyle}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Frame Margin="0,0,0,0" Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="110" BorderColor="LightGray" BackgroundColor="Transparent">
+                                <Label Text="Back" Style="{StaticResource DefaultLabelStyle2}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <Label Text="Image Position" Style="{StaticResource DefaultLabelStyle2}" FontSize="18" VerticalOptions="Center" HorizontalOptions="Start" Margin="15,20,0,0"/>
+                        <ScrollView Orientation="Horizontal"> 
+                                <StackLayout Orientation="Horizontal" Margin="0,5">
+                                    <Frame Margin="10,0,0,0" Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="110" BorderColor="LightGray" BackgroundColor="Red">
+                                        <Label Text="Top left" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontSize="12" HorizontalTextAlignment="Center"/>
+                                    </Frame>
+                                    <Frame Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="110" BorderColor="LightGray" BackgroundColor="Transparent">
+                                        <Label Text="Top right" Style="{StaticResource DefaultLabelStyle2}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="12" HorizontalTextAlignment="Center"/>
+                                    </Frame>
+                                    <Frame Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="110" BorderColor="LightGray" BackgroundColor="Transparent">
+                                        <Label Text="Center" Style="{StaticResource DefaultLabelStyle2}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="12" HorizontalTextAlignment="Center"/>
+                                    </Frame>
+                                    <Frame Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="125" BorderColor="LightGray" BackgroundColor="Transparent">
+                                        <Label Text="Buttom left"  Style="{StaticResource DefaultLabelStyle2}" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="12"/>
+                                    </Frame>
+                                    <Frame Margin="0,0,10,0" Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="130" BorderColor="LightGray" BackgroundColor="Transparent">
+                                        <Label Text="Buttom right" Style="{StaticResource DefaultLabelStyle2}" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="12"/>
+                                    </Frame> 
+                            </StackLayout>
+                        </ScrollView>
+                        
+                            <Frame Margin="10,0,250,10" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" HeightRequest="30" WidthRequest="70" BackgroundColor="Gray">
+                                <Label Text="Custom" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontSize="12" HorizontalTextAlignment="Center"/>
+                            </Frame> 
+                        <Button Text="Done" Margin="10" BackgroundColor="#E0333E" Style="{DynamicResource DefaultButtonStyle2}" Command="{Binding Done2Command}"/>
+                    </StackLayout>
+                </StackLayout>
+
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

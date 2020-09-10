@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Authentication.Views.RegisterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundImageSource="BgImage"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <yummy:PancakeView
+                    BackgroundGradientAngle="10"
+                    BackgroundGradientEndColor="#F1F2F2"
+                    BackgroundGradientStartColor="Transparent"
+                    CornerRadius="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout BackgroundColor="Transparent" VerticalOptions="CenterAndExpand">
+                        <Image
+                            Margin="0,5,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="150"
+                            HorizontalOptions="Center"
+                            Source="logo"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                        <StackLayout
+                            Margin="30,10"
+                            Orientation="Vertical"
+                            VerticalOptions="Center">
+                            <Frame
+                                Margin="0,5"
+                                Padding="6"
+                                HasShadow="False"
+                                HeightRequest="38"
+                                Style="{DynamicResource FrameStyle}">
+                                <controls:BorderlessEntry
+                                    Margin="20,0,10,0"
+                                    FontFamily="{DynamicResource QuicksandMediumFont}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Placeholder="First Name"
+                                    Style="{DynamicResource DefaultEntryStyle}"
+                                    Text="{Binding FirstName}" />
+                            </Frame>
+                            <Label
+                                FontSize="12"
+                                IsVisible="{Binding IsFirstNameErrorVisible}"
+                                Text="Please Enter First Name"
+                                TextColor="Red" />
+                            <Frame
+                                Margin="0,5"
+                                Padding="6"
+                                HasShadow="False"
+                                HeightRequest="38"
+                                Style="{DynamicResource FrameStyle}">
+                                <controls:BorderlessEntry
+                                    Margin="20,0,10,0"
+                                    FontFamily="{DynamicResource QuicksandMediumFont}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Placeholder="Last Name"
+                                    Style="{DynamicResource DefaultEntryStyle}"
+                                    Text="{Binding LastName}" />
+                            </Frame>
+                            <Label
+                                FontSize="12"
+                                IsVisible="{Binding IsLastNameErrorVisible}"
+                                Text="Please Enter LastName"
+                                TextColor="Red" />
+                            <Frame
+                                Margin="0,5"
+                                Padding="6"
+                                HasShadow="False"
+                                HeightRequest="38"
+                                Style="{DynamicResource FrameStyle}">
+                                <controls:BorderlessEntry
+                                    Margin="20,0,10,0"
+                                    FontFamily="{DynamicResource QuicksandMediumFont}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Keyboard="Email"
+                                    Placeholder="Email Address"
+                                    Style="{DynamicResource DefaultEntryStyle}"
+                                    Text="{Binding Email}" />
+                            </Frame>
+                            <Label
+                                FontSize="12"
+                                IsVisible="{Binding IsEmailErrorVisible}"
+                                Text="Please Enter Valid Email"
+                                TextColor="Red" />
+                            <Frame
+                                Margin="0,5,0,30"
+                                Padding="6"
+                                HasShadow="False"
+                                HeightRequest="38"
+                                Style="{DynamicResource FrameStyle}">
+                                <!--<controls:BorderlessEntry
+                             Style="{DynamicResource DefaultEntryStyle }" FontFamily="{DynamicResource QuicksandMediumFont}"
+                              HorizontalOptions="FillAndExpand"  Margin="20,0,10,0" Placeholder="Password" Text="{Binding Password}" IsPassword="True" />-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:BorderlessEntry
+                                        Grid.Column="0"
+                                        Margin="20,0,10,0"
+                                        FontFamily="{DynamicResource QuicksandMediumFont}"
+                                        HeightRequest="40"
+                                        HorizontalOptions="FillAndExpand"
+                                        IsPassword="{Binding IsPassword}"
+                                        Placeholder="********"
+                                        Style="{DynamicResource DefaultEntryStyle}"
+                                        Text="{Binding Password}" />
+
+                                    <Image
+                                        Grid.Column="1"
+                                        Margin="0,0,10,0"
+                                        HeightRequest="20"
+                                        HorizontalOptions="EndAndExpand"
+                                        Source="{Binding ImageVisible}"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="20">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding password_showCommand}" NumberOfTapsRequired="1" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                            <Label
+                                FontSize="12"
+                                IsVisible="{Binding IsPasswordErrorVisible}"
+                                Text="Must contain at least one number and one uppercase and lowercase letter and one special character, and at least 8 and at most 15"
+                                TextColor="Red" />
+                            <StackLayout>
+                                <Button
+                                    Margin="0,6"
+                                    BackgroundColor="#E0333E"
+                                    Command="{Binding RegisterCommand}"
+                                    IsEnabled="{Binding IsRegisterButtonEnabled}"
+                                    Style="{DynamicResource DefaultButtonStyle2}"
+                                    Text="Register" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Button
+                                    Margin="0,6"
+                                    Command="{Binding SigninCommand}"
+                                    Style="{DynamicResource DefaultButtonStyle2}"
+                                    Text="Sign in" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </yummy:PancakeView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.SettingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Margin="0,0,0,5"
+                HeightRequest="60"
+                Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton
+                        Margin="10"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GetBackCommand}"
+                        HeightRequest="24"
+                        HorizontalOptions="Start"
+                        Source="back"
+                        VerticalOptions="Center"
+                        WidthRequest="24" />
+                    <Label
+                        Margin="5,0"
+                        FontSize="20"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Setting"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
+            </StackLayout>
+
+            <StackLayout Margin="0,6">
+                <StackLayout Margin="10" Orientation="Vertical">
+                    <StackLayout Margin="0">
+                        <Grid Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*" />
+                                <ColumnDefinition Width="1.5*" />
+                                <ColumnDefinition Width="1.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                FontSize="18"
+                                Style="{StaticResource DefaultLabelStyle}"
+                                Text="Notification"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="18"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource DefaultLabelStyle}"
+                                Text="On"
+                                TextColor="#8c8c8c"
+                                VerticalOptions="Center" />
+                            <material:MaterialSwitch
+                                Grid.Column="2"
+                                ActiveThumbColor="Red"
+                                ActiveTrackColor="WhiteSmoke"
+                                InactiveThumbColor="Gray"
+                                InactiveTrackColor="WhiteSmoke"
+                                IsActivated="{Binding NotificationIsActive}" />
+                        </Grid>
+                        <!--<Grid Margin="20,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Order notification" VerticalOptions="CenterAndExpand" FontSize="16" Style="{StaticResource DefaultLabelStyle}"/>
+                            <Grid Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="On" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#8c8c8c" FontSize="16" Style="{StaticResource DefaultLabelStyle}"/>
+                                <material:MaterialSwitch Grid.Column="1" IsActivated="True" ActiveTrackColor="WhiteSmoke" ActiveThumbColor="Red" InactiveTrackColor="WhiteSmoke" InactiveThumbColor="Gray" />
+                            </Grid>
+                        </Grid>
+                        <Grid Margin="20,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Offers notification" VerticalOptions="CenterAndExpand" FontSize="16" Style="{StaticResource DefaultLabelStyle}"/>
+                            <Grid Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="On"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#8c8c8c" FontSize="16" Style="{StaticResource DefaultLabelStyle}"/>
+                                  <material:MaterialSwitch Grid.Column="1" IsActivated="True" ActiveTrackColor="WhiteSmoke" ActiveThumbColor="Red" InactiveTrackColor="WhiteSmoke" InactiveThumbColor="Gray" />
+                      </Grid>
+                        </Grid>-->
+                        <BoxView Margin="0,10,0,4" Style="{StaticResource BoxViewStyle}" />
+                        <BoxView Margin="0,10,0,4" Style="{StaticResource BoxViewStyle}" />
+                    </StackLayout>
+
+                    <StackLayout Margin="0,4">
+                        <Grid Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                FontSize="17"
+                                Style="{StaticResource DefaultLabelStyle}"
+                                Text="App language"
+                                VerticalOptions="CenterAndExpand" />
+                            <StackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="CenterAndExpand"
+                                Orientation="Horizontal">
+                                <controls:AppPicker
+                                    x:Name="picker"
+                                    Title="English"
+                                    FontFamily="{StaticResource QuicksandBoldFont}"
+                                    FontSize="16"
+                                    HorizontalOptions="EndAndExpand"
+                                    TextColor="#8c8c8c"
+                                    TitleColor="#8c8c8c"
+                                    VerticalOptions="Center">
+                                    <controls:AppPicker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>English</x:String>
+                                            <x:String>Hindi</x:String>
+                                        </x:Array>
+                                    </controls:AppPicker.ItemsSource>
+                                </controls:AppPicker>
+                                <Image
+                                    HeightRequest="13"
+                                    HorizontalOptions="Center"
+                                    Source="LinerDrowndrown"
+                                    VerticalOptions="Center"
+                                    WidthRequest="13" />
+                            </StackLayout>
+                        </Grid>
+                        <BoxView Margin="0,4" Style="{StaticResource BoxViewStyle}" />
+                    </StackLayout>
+                    <StackLayout Margin="0,4">
+                        <Grid Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                FontSize="17"
+                                Style="{StaticResource DefaultLabelStyle}"
+                                Text="Currency"
+                                VerticalOptions="Center" />
+                            <StackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                Orientation="Horizontal">
+                                <controls:AppPicker
+                                    Title="CAD-$"
+                                    FontFamily="{StaticResource QuicksandBoldFont}"
+                                    FontSize="16"
+                                    HorizontalOptions="EndAndExpand"
+                                    TextColor="#8c8c8c"
+                                    TitleColor="#8c8c8c"
+                                    VerticalOptions="Center">
+                                    <controls:AppPicker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>CAD-$</x:String>
+                                            <x:String>INR</x:String>
+                                            <x:String>$-USD</x:String>
+                                        </x:Array>
+                                    </controls:AppPicker.ItemsSource>
+                                </controls:AppPicker>
+                                <Image
+                                    HeightRequest="13"
+                                    HorizontalOptions="Center"
+                                    Source="LinerDrowndrown"
+                                    VerticalOptions="Center"
+                                    WidthRequest="13" />
+                            </StackLayout>
+                        </Grid>
+                        <BoxView Margin="0,4" Style="{StaticResource BoxViewStyle}" />
+                    </StackLayout>
+
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout
+                Margin="0,20"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand">
+                <Label
+                    FontSize="12"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource DefaultLabelStyle2}"
+                    Text="App Version"
+                    TextColor="#8c8c8c" />
+                <Label
+                    FontSize="12"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource DefaultLabelStyle2}"
+                    Text="0.1.0.1"
+                    TextColor="#8c8c8c" />
+                <!--<Label Text="©2020,IMark.ca"  Style="{StaticResource DefaultLabelStyle2}" TextColor="#8c8c8c" FontSize="12" HorizontalTextAlignment="Center"/>
+                 <Label Text="Canadian provider of performance sports equipment" Style="{StaticResource DefaultLabelStyle2}" TextColor="#8c8c8c"  FontSize="12" HorizontalTextAlignment="Center"/>
+                 <Label Text="for 10 year E-commerce powered by Shopify" Style="{StaticResource DefaultLabelStyle2}" FontSize="12" TextColor="#8c8c8c" HorizontalTextAlignment="Center"/>-->
+            </StackLayout>
+        </StackLayout>
+        <!--<StackLayout  VerticalOptions="End">
+        <yummy:PancakeView Style="{DynamicResource SettingsPancakeViewStyle}"  CornerRadius="10,10,0,0" Margin="14,0">
+          <yummy:PancakeView.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="5,5,5,100"/>
+                    <On Platform="Android" Value="5,5,5,40"/>
+                </OnPlatform>
+            </yummy:PancakeView.Padding>
+
+            <StackLayout Margin="10,5,10,0">
+                <Grid RowSpacing="22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="6,0" Grid.ColumnSpan="2" TextType="Text" Text="Settings" Style="{DynamicResource DefaultLabelStyle}" FontFamily="{DynamicResource PoppinsBoldFont}" FontSize="25" VerticalOptions="Center" HorizontalOptions="Start"/>
+        -->
+        <!--<ImageButton Grid.Column="2" Source="close" Clicked="Close_Clicked" BackgroundColor="Transparent" WidthRequest="16" HeightRequest="16" VerticalOptions="Center" HorizontalOptions="End"  />-->
+
+        <!--<ImageButton Grid.Row="1" Grid.Column="0" Padding="10" CornerRadius="6" Source="bell" BackgroundColor="#EBF3FB" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"   />
+                    <Label Grid.Row="1" Grid.Column="1" Text="Keep me updated" Style="{DynamicResource DefaultLabelStyle}" FontFamily="{DynamicResource RobotoBoldFont}" FontSize="18" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Switch Toggled="SwitchNotificationToggled" Grid.Row="1" Grid.Column="2" OnColor="Gray" ThumbColor="Red" VerticalOptions="Center" HorizontalOptions="End" />-->
+        <!--
+                    <ImageButton Grid.Row="1" Grid.Column="0" Padding="10" CornerRadius="6" Source="phases" BackgroundColor="#FFEBEC" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"   />
+                    <Label TextType="Text" Grid.Row="1" Grid.Column="1" Text="Dark Mode" Style="{DynamicResource DefaultLabelStyle}" FontFamily="{DynamicResource RobotoBoldFont}" FontSize="18" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Switch x:Name="SwitchIsToggled"  Toggled="SwitchDarkModeToggled" Grid.Row="1" Grid.Column="2" OnColor="#cccccc" ThumbColor="Gray" VerticalOptions="Center" HorizontalOptions="End" />
+                    <ImageButton Grid.Row="2" Grid.Column="0" Padding="10" CornerRadius="6" Source="feather" BackgroundColor="#F1F9ED" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"   />
+                    <Label TextType="Text" Grid.Row="2" Grid.Column="1" Text="Background Color" Style="{DynamicResource DefaultLabelStyle}" FontFamily="{DynamicResource RobotoBoldFont}" FontSize="18" VerticalOptions="Center" HorizontalOptions="Start" />
+                        <Frame BackgroundColor="{x:DynamicResource CommonPageBackgroundColor}" Margin="5,0"  Grid.Row="2" Padding="1" Grid.Column="2" HeightRequest="22" WidthRequest="22" CornerRadius="12" BorderColor="#707070" HasShadow="False" VerticalOptions="Center" HorizontalOptions="End" />
+                    </Grid>
+            </StackLayout>
+        </yummy:PancakeView>
+    </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

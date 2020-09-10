@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.ShippingConfirmation"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="8,0">
+                <StackLayout
+                    Margin="0,0,0,5"
+                    HeightRequest="60"
+                    Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <ImageButton
+                            Margin="10"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding GetBackCommand}"
+                            HeightRequest="24"
+                            HorizontalOptions="Start"
+                            Source="back"
+                            VerticalOptions="Center"
+                            WidthRequest="24" />
+                        <Label
+                            Margin="5,0"
+                            FontSize="20"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DefaultLabelStyle}"
+                            Text="Shipping Confirmation"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label
+                        Margin="0,6"
+                        FontSize="16"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Shipping Address"
+                        VerticalOptions="Center" />
+                    <Label
+                        FontSize="16"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding PhoneNumber}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Margin="0,0,0,10"
+                        FontSize="16"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding EmailId}"
+                        VerticalOptions="Center" />
+                    <Label
+                        FontSize="16"
+                        HorizontalOptions="StartAndExpand"
+                        MaxLines="2"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="{Binding CompleteAddress}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Padding="5"
+                        FontSize="14"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Change"
+                        TextColor="#0090FF"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.ChangeCommand, Source={x:Reference thispage}}" CommandParameter="{Binding .}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                </StackLayout>
+                <StackLayout Margin="0,8,0,0" HeightRequest="300">
+                    <Label
+                        Margin="0,10"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Cart item"
+                        VerticalOptions="Center" />
+                    <CollectionView ItemsSource="{Binding CartList}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.4*" />
+                                            <ColumnDefinition Width="4.9*" />
+                                            <ColumnDefinition Width="2.7*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Frame
+                                            HasShadow="False"
+                                            HeightRequest="120"
+                                            HorizontalOptions="Fill"
+                                            Style="{DynamicResource FrameStyle}"
+                                            VerticalOptions="Fill">
+                                            <forms:CachedImage
+                                                Aspect="AspectFill"
+                                                ErrorPlaceholder="LoadIcon"
+                                                LoadingPlaceholder="LoadIcon"
+                                                Source="{Binding variant.image.originalSrc}" />
+                                        </Frame>
+                                        <StackLayout Grid.Column="1" Margin="0,2">
+                                            <Label
+                                                FontSize="18"
+                                                HorizontalOptions="Start"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"
+                                                Style="{DynamicResource DefaultLabelStyle}"
+                                                Text="{Binding title}"
+                                                TextType="Text"
+                                                VerticalOptions="End" />
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="color: "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding variant.selectedOptions[0].Value}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="Size: "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding variant.selectedOptions[0].Value}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <Label
+                                                FontSize="15"
+                                                HorizontalOptions="Start"
+                                                MaxLines="1"
+                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                Text="Custom Embroidery Or Print: "
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                            <Label
+                                                FontSize="15"
+                                                HorizontalOptions="Start"
+                                                MaxLines="1"
+                                                Style="{DynamicResource DefaultLabelStyle}"
+                                                Text="John Smith"
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2">
+                                            <Label
+                                                Margin="0,2,0,4"
+                                                FontSize="20"
+                                                HorizontalOptions="End"
+                                                MaxLines="1"
+                                                Style="{DynamicResource DefaultLabelStyle}"
+                                                Text="{Binding Price}"
+                                                TextColor="#D4283A"
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                            <Grid
+                                                Grid.Column="2"
+                                                ColumnSpacing="0"
+                                                IsVisible="{Binding StackLayoutIsVisible}">
+                                                <ImageButton
+                                                    BackgroundColor="Transparent"
+                                                    Command="{Binding MinusCommand}"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    Source="{Binding MinusImage}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="25" />
+                                                <Label
+                                                    Grid.Column="1"
+                                                    FontSize="18"
+                                                    HorizontalOptions="Center"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="{Binding Counter}"
+                                                    TextColor="Black"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <ImageButton
+                                                    Grid.Column="2"
+                                                    BackgroundColor="Transparent"
+                                                    Command="{Binding PlusCommand}"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    Source="{Binding PlusImage}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="25" />
+                                            </Grid>
+                                        </StackLayout>
+                                        <!--<Grid.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Path=BindingContext.CartListCommand, Source={x:Reference thispage}}" />
+                                        </Grid.GestureRecognizers>-->
+                                    </Grid>
+                                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+                <StackLayout Margin="10">
+                    <!--<Frame HasShadow="False" Padding="0" Style="{DynamicResource FrameStyle}" HorizontalOptions="FillAndExpand"  HeightRequest="64">-->
+                    <Grid ColumnDefinitions="7*,3*" VerticalOptions="CenterAndExpand">
+                        <controls:BorderlessEntry
+                            FontFamily="{DynamicResource QuicksandBoldFont}"
+                            FontSize="18"
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Have a Coupon code?"
+                            Style="{DynamicResource DefaultEntryStyle}"
+                            Text="{Binding CouponCode}"
+                            VerticalOptions="StartAndExpand" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="18"
+                            HorizontalOptions="End"
+                            Style="{DynamicResource DefaultLabelStyle}"
+                            Text="Redeem"
+                            TextColor="Red"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <!--<StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddPicturesCommand }"/>
+                            </StackLayout.GestureRecognizers>-->
+                    </Grid>
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                    <!--</Frame>-->
+                </StackLayout>
+
+                <StackLayout Margin="0,8">
+                    <Grid RowSpacing="12">
+                        <Label
+                            Grid.Column="0"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle2}"
+                            Text="Cost summary"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="16"
+                            HorizontalOptions="End"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle}"
+                            Text="{Binding CostSummary}"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle2}"
+                            Text="Shipping Charges"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="16"
+                            HorizontalOptions="End"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle}"
+                            Text="{Binding ShippingPrice}"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            FontSize="20"
+                            HorizontalOptions="Start"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle}"
+                            Text="Total Price"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            FontSize="20"
+                            HorizontalOptions="End"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle}"
+                            Text="{Binding TotalPrice}"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FontSize="16"
+                            HorizontalOptions="End"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle2}"
+                            Text="Included all taxes"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            FontSize="20"
+                            HorizontalOptions="Start"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle}"
+                            Text="Quantity"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            FontSize="16"
+                            HorizontalOptions="End"
+                            MaxLines="1"
+                            Style="{DynamicResource DefaultLabelStyle2}"
+                            Text="{Binding TotalQuantity, StringFormat='{{0} item}'}"
+                            TextType="Text"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </StackLayout>
+                <StackLayout>
+                    <Label
+                        Margin="0,20,0,0"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Add special instruction"
+                        VerticalOptions="Center" />
+                    <BoxView Margin="0,10" Style="{StaticResource BoxViewStyle}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,20,0,20">
+                    <Button
+                        Margin="0,6"
+                        BackgroundColor="#E0333E"
+                        Command="{Binding PaymentCommand}"
+                        IsEnabled="{Binding IsPaymentEnabled}"
+                        Style="{DynamicResource DefaultButtonStyle2}"
+                        Text="Continue to Payment method" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

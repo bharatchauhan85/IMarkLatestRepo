@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.DesignLab"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    xmlns:tt="clr-namespace:TouchTracking">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Grid HeightRequest="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition Width="5.8*" />
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition Width="1.4*" />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+                    x:Name="BackBtn"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Clicked="BackBtn_Clicked"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Source="back"
+                    VerticalOptions="Center"
+                    WidthRequest="40" />
+                <Button
+                    x:Name="addToCart"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3"
+                    Margin="5"
+                    Clicked="Button_Clicked_1"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Add To Cart"
+                    VerticalOptions="StartAndExpand" />
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="White">
+                <skia:SKCanvasView x:Name="canvasView" PaintSurface="OnCanvasViewPaintSurface" />
+                <Grid.Effects>
+                    <tt:TouchEffect Capture="True" TouchAction="OnTouchEffectAction" />
+                </Grid.Effects>
+            </Grid>
+
+            <ScrollView
+                Grid.Row="2"
+                HorizontalScrollBarVisibility="Always"
+                Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal">
+                    <Button Clicked="AddTextBtn_Clicked" Text="Add Text" />
+                    <Button
+                        x:Name="AddImgBtn"
+                        Clicked="AddImgBtn_Clicked"
+                        Text="Add Image" />
+                    <Button
+                        x:Name="EmojiBtn"
+                        Clicked="EmojiBtn_Clicked"
+                        Text="Add Emoji" />
+                    <Button
+                        x:Name="SaveBtn"
+                        Clicked="SaveBtn_Clicked"
+                        Text="Save PNG" />
+                    <Button
+                        x:Name="RemoveBtn"
+                        Clicked="RemoveBtn_Clicked"
+                        Text="Remove" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

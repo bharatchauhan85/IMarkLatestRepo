@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Local="clr-namespace:IMark.Areas.Views"
+             mc:Ignorable="d"  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true" xmlns:translate="clr-namespace:IMark.Resources"
+             material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+             BackgroundColor="{DynamicResource CommonPageBackgroundColor}" NavigationPage.HasNavigationBar="False"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" xmlns:Controls="clr-namespace:IMark.Controls"
+             x:Class="IMark.Areas.Views.TabbedBaar.MainTabbedBar"    
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom" Title="Home" android:TabbedPage.IsSwipePagingEnabled="False"     
+            BarBackgroundColor="#f9f9f9" UnselectedTabColor="#C7C6CC" SelectedTabColor="Red">
+
+        <NavigationPage Title="Home" IconImageSource="home.png" >
+            <x:Arguments>
+                <Local:Home />
+            </x:Arguments>
+        </NavigationPage>
+    <NavigationPage Title="Category" IconImageSource="categorygrey.png">
+            <x:Arguments>
+            <Local:CategoryPage />
+            </x:Arguments>
+        </NavigationPage>
+    <NavigationPage x:Name="cart" Title="Cart" IconImageSource="card.png">
+            <x:Arguments>
+                <Local:CartPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Account" IconImageSource="account.png">
+            <x:Arguments>
+                <Local:ProfilePage />
+            </x:Arguments>
+        </NavigationPage>
+</TabbedPage>

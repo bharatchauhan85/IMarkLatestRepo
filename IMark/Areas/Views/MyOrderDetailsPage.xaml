@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.MyOrderDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:convertor="clr-namespace:IMark.Convertor"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <convertor:StatusToColorConvertor x:Key="statusToColor" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Margin="0,0,0,5"
+                HeightRequest="60"
+                Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton
+                        Margin="10"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GetBackCommand}"
+                        HeightRequest="24"
+                        HorizontalOptions="Start"
+                        Source="back"
+                        VerticalOptions="Center"
+                        WidthRequest="24" />
+                    <Label
+                        Margin="5,0"
+                        FontSize="20"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}"
+                        Text="Orders Details"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout Margin="10,0">
+
+
+                    <CollectionView
+                        Grid.Row="1"
+                        Margin="5,0"
+                        ItemsSource="{Binding MyOrderDetailList}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.4*" />
+                                            <ColumnDefinition Width="5*" />
+                                            <ColumnDefinition Width="2.6*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Frame
+                                            HasShadow="False"
+                                            HeightRequest="150"
+                                            HorizontalOptions="Fill"
+                                            Style="{DynamicResource FrameStyle}"
+                                            VerticalOptions="Fill">
+                                            <forms:CachedImage
+                                                Aspect="AspectFill"
+                                                ErrorPlaceholder="LoadIcon"
+                                                LoadingPlaceholder="LoadIcon"
+                                                Source="{Binding node.lineItems.edges[0].node.variant.image.originalSrc}" />
+                                        </Frame>
+                                        <StackLayout Grid.Column="1" Margin="0,2">
+                                            <Label
+                                                FontSize="18"
+                                                HorizontalOptions="Start"
+                                                LineBreakMode="NoWrap"
+                                                MaxLines="1"
+                                                Style="{DynamicResource DefaultLabelStyle}"
+                                                Text="{Binding node.lineItems.edges[0].node.title}"
+                                                TextType="Text"
+                                                VerticalOptions="End" />
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="color: "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding node.lineItems.edges[0].node.variant.selectedOptions[1].Value}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="Size: "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding node.lineItems.edges[0].node.variant.selectedOptions[0].Value}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="Material"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding node.lineItems.edges[0].node.variant.selectedOptions[2].Value}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="Price "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding node.lineItems.edges[0].node.variant.price}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="$ "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="Order No. "
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="Start"
+                                                    MaxLines="1"
+                                                    Style="{DynamicResource DefaultLabelStyle}"
+                                                    Text="{Binding node.orderNumber}"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Margin="0,8,0,0">
+                                            <Frame
+                                                Padding="10,0"
+                                                BackgroundColor="{Binding Status, Converter={StaticResource statusToColor}}"
+                                                BorderColor="{Binding FrameColor}"
+                                                CornerRadius="10"
+                                                HasShadow="False"
+                                                HeightRequest="28"
+                                                Style="{StaticResource FrameStyle}">
+                                                <Label
+                                                    FontSize="12"
+                                                    HorizontalOptions="Center"
+                                                    HorizontalTextAlignment="Center"
+                                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                                    Text="{Binding Status}"
+                                                    TextColor="White"
+                                                    TextType="Text"
+                                                    VerticalOptions="Center" />
+                                            </Frame>
+                                        </StackLayout>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.MyOrderCommand, Source={x:Reference thispage}}" CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                    <BoxView Style="{StaticResource BoxViewStyle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+
+
+
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.4*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame Style="{DynamicResource FrameStyle }" HasShadow="False" HorizontalOptions="Fill" VerticalOptions="Fill">
+                            <forms:CachedImage Source="{Binding Image}" Aspect="AspectFill" ErrorPlaceholder="LoadIcon"  LoadingPlaceholder="LoadIcon"/>
+                        </Frame>
+                        <StackLayout Margin="0,2" Grid.Column="1">
+                            <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle}" LineBreakMode="NoWrap" Text="{Binding Title }" MaxLines="1" VerticalOptions="End"  HorizontalOptions="Start" FontSize="18"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle2}" Text="color: " MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="15"/>
+                                <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="{Binding ProductColor}" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="15"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle2}" Text="Size: " MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="15"/>
+                                <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="{Binding ProdcutSize}" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="15"/>
+                            </StackLayout>
+                            <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle2}" Text="Custom Embroidery Or Print: " MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="15"/>
+                            <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="John Smith" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="15"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <Frame  Padding="10,0" CornerRadius="10" HeightRequest="28" BorderColor="{Binding FrameColor}" BackgroundColor="{Binding FrameColor}" Style="{StaticResource FrameStyle}" HasShadow="False">
+                                <Label Margin="0,3,0,5" TextType="Text" Style="{DynamicResource DefaultLabelStyle2}" Text="{Binding OrderStatus}"  VerticalOptions="Start" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="12" TextColor="White"/>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                    <BoxView Margin="0,10" Style="{StaticResource BoxViewStyle}"/>
+                    <StackLayout>
+                        <Grid RowSpacing="10">
+                            <Label Grid.Column="0" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="Order Total" TextColor="Gray" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="16"/>
+                            <Label Grid.Column="1" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="$21.08" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="End" FontSize="16"/>
+                            <Label Grid.Row="1" Grid.Column="0" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="Shipping Charges" MaxLines="1" TextColor="Gray" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="16"/>
+                            <Label Grid.Row="1" Grid.Column="1" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="$10" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="End" FontSize="20"/>
+                            <Label Grid.Row="2" Grid.Column="0" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="Total Price" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="Start" FontSize="20"/>
+                            <Label Grid.Row="2" Grid.Column="1" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="$21.08" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="End" FontSize="20"/>
+                            <Label Grid.Row="3" Grid.Column="0" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="1 items" TextColor="Gray" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                            <Label Grid.Row="3" Grid.Column="1" TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="Included all taxes" TextColor="Gray" MaxLines="1" VerticalOptions="Center"  HorizontalOptions="End" FontSize="15"/>
+
+                        </Grid>
+                    </StackLayout>-->
+
+                    <StackLayout Margin="0,20">
+                        <Button
+                            BackgroundColor="Transparent"
+                            BorderColor="#D4283A"
+                            BorderWidth="2"
+                            Command="{Binding PublishCommand}"
+                            Style="{DynamicResource DefaultButtonStyle}"
+                            Text="Download invoice"
+                            TextColor="#D4283A" />
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

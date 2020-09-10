@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"  x:Name="thispage"  xmlns:translate="clr-namespace:IMark.Resources"
+             NavigationPage.HasNavigationBar="False"
+             material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+             BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" xmlns:controls="clr-namespace:IMark.Controls" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="IMark.Areas.Views.PaymentPage">
+    <ContentPage.Content> 
+        <StackLayout>
+            <StackLayout Margin="0,0,0,5"                
+                HeightRequest="60"
+                Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton Source="back" Padding="0" Margin="10" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="24" WidthRequest="24"   Command="{Binding GetBackCommand }"/>
+                    <Label
+                       Text="Payment mode" Margin="5,0" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}" FontSize="20"/>
+                </StackLayout>
+                <BoxView Style="{StaticResource BoxViewStyle}"/>
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout Margin="10">
+                    <Label TextType="Text" Text="Total Price"  Style="{DynamicResource DefaultLabelStyle2}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                    <Label TextType="Text" Margin="0,8" Text="$31.08" FontAttributes="Bold" TextColor="#D4283A" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="40"/>
+                    <Label TextType="Text" Margin="0,5" Text="Payment Method"  Style="{DynamicResource DefaultLabelStyle2}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                    <CollectionView ItemsSource="{Binding PaymentModeList}" HeightRequest="80">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Frame Style="{DynamicResource FrameStyle }" Padding="8" BorderColor="#D4283A" BackgroundColor="#D4283A" HeightRequest="45" WidthRequest="140" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Grid ColumnDefinitions="8*,2*">
+                                            <Label TextType="Text" Margin="0,5" Text="{Binding Title}" TextColor="White"  Style="{DynamicResource DefaultLabelStyle2}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                                            <Image Grid.Column="1" Source="{Binding Image}" VerticalOptions="Center" HorizontalOptions="End" Aspect="AspectFit"/>
+                                        </Grid>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                        
+                    <StackLayout>
+                        <Label TextType="Text" Margin="0,5" Text="Card Number" Style="{DynamicResource DefaultLabelStyle}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                        <Frame Padding="10" Margin="0,5,0,10" BackgroundColor="#E9E9E9" BorderColor="#d9d9d9" Style="{DynamicResource FrameStyle}">
+                            <controls:BorderlessEntry FontSize="16"  Text="{Binding CardNumber}" MaxLength="16" Placeholder="Card Number" Keyboard="Numeric" Style="{DynamicResource DefaultEntryStyle }" FontFamily="{DynamicResource QuicksandBoldFont}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </Frame>
+
+                        <Grid ColumnSpacing="10" Margin="0,5">
+                            <Label TextType="Text" Text="Valid unlil"  Style="{DynamicResource DefaultLabelStyle}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                            <Label Grid.Column="1" TextType="Text" Text="CVV"  Style="{DynamicResource DefaultLabelStyle}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                        </Grid>
+                        <Grid ColumnSpacing="10" Margin="0,5">
+                            <Frame Padding="10"  BackgroundColor="#E9E9E9" BorderColor="#d9d9d9" Style="{DynamicResource FrameStyle}">
+                                <controls:BorderlessDatePicker Placeholder="Month/Year" Date="{Binding Expiry}" MinimumDate="{Binding FromMiminumDate}" MaximumDate="06/20/2025" Style="{DynamicResource DefaultEntryStyle }" FontFamily="{DynamicResource QuicksandBoldFont}"  FontSize="16" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                            </Frame>
+                            
+                            <Frame Grid.Column="1" Padding="12" BackgroundColor="#E9E9E9" BorderColor="#d9d9d9" Style="{DynamicResource FrameStyle}">
+                                <controls:BorderlessEntry FontSize="16" Text="{Binding cvv}" Placeholder="cvv" MaxLength="3" Style="{DynamicResource DefaultEntryStyle }" Keyboard="Numeric" FontFamily="{DynamicResource QuicksandBoldFont}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                            </Frame>
+                           
+                        </Grid>
+                             <Label TextType="Text" Margin="0,5" Text="Card Holder Name"  Style="{DynamicResource DefaultLabelStyle2}" MaxLines="1" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15"/>
+                            <Frame Padding="10" Margin="0,5" BackgroundColor="#E9E9E9" BorderColor="#d9d9d9" Style="{DynamicResource FrameStyle}">
+                                <controls:BorderlessEntry FontSize="16"  Text="{Binding CardName}" MaxLength="30" Placeholder="Card Holder Name" Style="{DynamicResource DefaultEntryStyle }" FontFamily="{DynamicResource QuicksandBoldFont}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                            </Frame>
+                        
+                    </StackLayout>
+
+                    <Grid ColumnDefinitions="Auto,*" Margin="5,20">                        
+                        <Label Text="Save card for future" VerticalOptions="Center" HorizontalOptions="Start" Style="{StaticResource DefaultLabelStyle}" TextColor="Gray" FontSize="15">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SaveAndUnsaveCardCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Switch Grid.Column="1" x:Name="SwitchIsToggled" OnColor="Red" ThumbColor="DarkRed" VerticalOptions="Center" HorizontalOptions="End" />
+                    </Grid>
+
+                    <StackLayout Margin="0,40,0,20">
+                        <Button Text="Continue to Payment method" Style="{DynamicResource DefaultButtonStyle}" Command="{Binding PaymentCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IMark.Areas.Views.Common.RichContainer">
+    <ContentView.Content>
+        <Grid>
+            <Button HorizontalOptions="Start" VerticalOptions="Start" Clicked="Button_Clicked" Text="Close"/>
+            <Frame Padding="0" BorderColor="Black" CornerRadius="0">
+                <Label Text="Testing Eliment"/>
+            </Frame>
+            <Button HorizontalOptions="End" VerticalOptions="End" Text="Zoom">
+                <Button.GestureRecognizers>
+                    <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
+                </Button.GestureRecognizers>
+            </Button>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

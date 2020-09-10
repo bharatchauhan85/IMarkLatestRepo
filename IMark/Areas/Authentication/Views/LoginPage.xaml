@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Authentication.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0">
+            <Image Aspect="AspectFill" Source="BgImage" />
+            <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+                <StackLayout>
+                    <yummy:PancakeView
+                        BackgroundGradientAngle="10"
+                        BackgroundGradientEndColor="#F1F2F2"
+                        BackgroundGradientStartColor="Transparent"
+                        CornerRadius="0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Image
+                                Margin="0,10,0,0"
+                                HeightRequest="150"
+                                HorizontalOptions="Center"
+                                Source="logo"
+                                VerticalOptions="Center"
+                                WidthRequest="150" />
+                            <StackLayout
+                                Margin="30,10"
+                                Orientation="Vertical"
+                                VerticalOptions="Center">
+                                <Frame
+                                    Margin="0,14"
+                                    Padding="6"
+                                    HasShadow="False"
+                                    HeightRequest="38"
+                                    Style="{DynamicResource FrameStyle}">
+                                    <controls:BorderlessEntry
+                                        Margin="20,0,10,0"
+                                        FontFamily="{DynamicResource QuicksandMediumFont}"
+                                        HorizontalOptions="FillAndExpand"
+                                        Keyboard="Email"
+                                        Placeholder="Email Address"
+                                        Style="{DynamicResource DefaultEntryStyle}"
+                                        Text="{Binding Email}" />
+                                </Frame>
+                                <Label
+                                    FontSize="12"
+                                    IsVisible="{Binding IsEmailErrorVisible}"
+                                    Text="Please Enter Valid Email"
+                                    TextColor="Red" />
+                                <Frame
+                                    Padding="6"
+                                    HasShadow="False"
+                                    HeightRequest="38"
+                                    Style="{DynamicResource FrameStyle}">
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="50" />
+                                        </Grid.ColumnDefinitions>
+                                        <controls:BorderlessEntry
+                                            Grid.Column="0"
+                                            Margin="20,0,10,0"
+                                            FontFamily="{DynamicResource QuicksandMediumFont}"
+                                            HeightRequest="40"
+                                            HorizontalOptions="FillAndExpand"
+                                            IsPassword="{Binding IsPassword}"
+                                            Placeholder="********"
+                                            Style="{DynamicResource DefaultEntryStyle}"
+                                            Text="{Binding Password}" />
+
+                                        <Image
+                                            Grid.Column="1"
+                                            Margin="0,0,10,0"
+                                            HeightRequest="20"
+                                            HorizontalOptions="EndAndExpand"
+                                            Source="{Binding ImageVisible}"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="20">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding password_showCommand}" NumberOfTapsRequired="1" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+
+
+                                    <!--<controls:BorderlessEntry
+                              Style="{DynamicResource DefaultEntryStyle }" FontFamily="{DynamicResource QuicksandMediumFont}"
+                              HorizontalOptions="FillAndExpand"  Margin="20,0,10,0" Placeholder="Password" Text="{Binding Password}" IsPassword="True" />-->
+                                </Frame>
+                                <Label
+                                    FontSize="12"
+                                    IsVisible="{Binding IsPasswordErrorVisible}"
+                                    Text="Must contain at least one number and one uppercase and lowercase letter and one special character, and at least 8 and at most 15"
+                                    TextColor="Red" />
+                                <Label
+                                    Margin="0,5"
+                                    FontFamily="{DynamicResource RobotoRegularFont}"
+                                    HorizontalOptions="End"
+                                    Style="{StaticResource DefaultLabelStyle}"
+                                    Text="Forgot Password?"
+                                    VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ForgotPassword}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <StackLayout>
+                                    <Button
+                                        Margin="0,6"
+                                        BackgroundColor="#E0333E"
+                                        Command="{Binding SigninCommand}"
+                                        IsEnabled="{Binding IsSignInButtonEnabled}"
+                                        Style="{DynamicResource DefaultButtonStyle2}"
+                                        Text="Sign in" />
+                                </StackLayout>
+                                <StackLayout>
+                                    <Button
+                                        Margin="0,6"
+                                        Command="{Binding NewaccountCommand}"
+                                        Style="{DynamicResource DefaultButtonStyle2}"
+                                        Text="Create a new account" />
+                                </StackLayout>
+                                <!--<Label
+                                    Margin="5,5,5,0"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{StaticResource DefaultLabelStyle}"
+                                    Text="OR"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Label
+                                    Margin="5,0"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{StaticResource DefaultLabelStyle}"
+                                    Text="LOGIN WITH"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Grid>
+                                    <Grid Grid.Column="0" HorizontalOptions="End">
+                                        <Image
+                                            Margin="0,6"
+                                            HeightRequest="80"
+                                            HorizontalOptions="Center"
+                                            Source="Facebook"
+                                            VerticalOptions="Center"
+                                            WidthRequest="80" />
+                                        <Label
+                                            FontSize="12"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            Style="{StaticResource DefaultLabelStyle2}"
+                                            Text="Facebook"
+                                            TextColor="#00679C"
+                                            VerticalOptions="End" />
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FacebookCommand}" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                    <Grid Grid.Column="1" HorizontalOptions="Start">
+                                        <Image
+                                            Margin="0,6"
+                                            HeightRequest="80"
+                                            HorizontalOptions="Center"
+                                            Source="Google"
+                                            VerticalOptions="Center"
+                                            WidthRequest="80" />
+                                        <Label
+                                            Margin="5,0"
+                                            FontSize="12"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            Style="{StaticResource DefaultLabelStyle2}"
+                                            Text="Google"
+                                            TextColor="Red"
+                                            VerticalOptions="End" />
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding GoogleCommand}" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </Grid>-->
+                            </StackLayout>
+                        </StackLayout>
+                    </yummy:PancakeView>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMark.Areas.Views.ProductDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviour="clr-namespace:IMark.Behaviors"
+    xmlns:controls="clr-namespace:IMark.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:IMark.Convertor"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:translate="clr-namespace:IMark.Resources"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Name="thispage"
+    ios:Page.UseSafeArea="true"
+    material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}"
+    BackgroundColor="{DynamicResource CommonPageBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <local:ProductStatusConvertor x:Key="productStatus" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="0" Padding="0">
+                <Grid Margin="0" Padding="5,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="1" />
+                    </Grid.RowDefinitions>
+                    <Grid Padding="0" VerticalOptions="CenterAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="7.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                        </Grid.ColumnDefinitions>
+                        <ImageButton
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding GetBackCommand}"
+                            HeightRequest="24"
+                            HorizontalOptions="Center"
+                            Source="back"
+                            VerticalOptions="Center"
+                            WidthRequest="24" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="20"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource DefaultLabelStyle}"
+                            Text="Product Details"
+                            VerticalOptions="CenterAndExpand" />
+                        <ImageButton
+                            Grid.Column="2"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding ShareCommand}"
+                            HeightRequest="26"
+                            HorizontalOptions="Center"
+                            Source="share"
+                            VerticalOptions="Center"
+                            WidthRequest="26" />
+                    </Grid>
+                    <BoxView
+                        Grid.Row="1"
+                        HeightRequest="1"
+                        Style="{StaticResource BoxViewStyle}"
+                        VerticalOptions="EndAndExpand" />
+                </Grid>
+
+                <StackLayout Margin="0" Padding="0">
+                    <Grid>
+                        <StackLayout
+                            Margin="2"
+                            Padding="0"
+                            HeightRequest="240">
+                            <CarouselView
+                                x:Name="Crsl"
+                                HorizontalScrollBarVisibility="Never"
+                                ItemsSource="{Binding CarouselList}"
+                                VerticalScrollBarVisibility="Never">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <forms:CachedImage
+                                                Aspect="Fill"
+                                                BackgroundColor="Transparent"
+                                                ErrorPlaceholder="LoadIcon"
+                                                HeightRequest="160"
+                                                HorizontalOptions="Center"
+                                                LoadingPlaceholder="LoadIcon"
+                                                Source="{Binding .}"
+                                                VerticalOptions="Center"
+                                                WidthRequest="140" />
+
+                                            <Grid>
+                                                <ImageButton
+                                                    Margin="5"
+                                                    Aspect="AspectFill"
+                                                    BackgroundColor="Transparent"
+                                                    HorizontalOptions="End"
+                                                    Source="wishlistgrey"
+                                                    VerticalOptions="Start" />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView
+                                Margin="20"
+                                HorizontalOptions="Center"
+                                IndicatorColor="WhiteSmoke"
+                                IndicatorSize="8"
+                                IndicatorView.ItemsSource="{Binding CarouselList}"
+                                IndicatorsShape="Circle"
+                                Position="{Binding Source={x:Reference Crsl}, Path=Position}"
+                                SelectedIndicatorColor="Red"
+                                VerticalOptions="End" />
+
+                        </StackLayout>
+                        <Label
+                            Margin="0,0,10,20"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            HorizontalOptions="EndAndExpand"
+                            IsVisible="{Binding BuyNowText, Converter={StaticResource productStatus}}"
+                            Text="{Binding BuyNowText}"
+                            TextColor="Red"
+                            VerticalOptions="EndAndExpand" />
+                    </Grid>
+
+                    <yummy:PancakeView
+                        Padding="10"
+                        BackgroundColor="White"
+                        BorderColor="WhiteSmoke"
+                        BorderThickness="2"
+                        CornerRadius="20,20,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        TranslationY="-20"
+                        VerticalOptions="FillAndExpand">
+                        <StackLayout Margin="0,10">
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout
+                                        Grid.Column="0"
+                                        Margin="0,0,10,0"
+                                        VerticalOptions="CenterAndExpand">
+                                        <Label
+                                            FontSize="16"
+                                            HorizontalOptions="Start"
+                                            MaxLines="3"
+                                            Style="{DynamicResource DefaultLabelStyle}"
+                                            Text="{Binding Title}"
+                                            TextColor="#171717"
+                                            TextType="Text"
+                                            VerticalOptions="Center" />
+                                        <StackLayout
+                                            HorizontalOptions="Start"
+                                            Orientation="Horizontal"
+                                            Spacing="2">
+                                            <Image
+                                                HeightRequest="10"
+                                                Source="star"
+                                                VerticalOptions="Center"
+                                                WidthRequest="10" />
+                                            <Image
+                                                HeightRequest="10"
+                                                Source="star"
+                                                VerticalOptions="Center"
+                                                WidthRequest="10" />
+                                            <Image
+                                                HeightRequest="10"
+                                                Source="star"
+                                                VerticalOptions="Center"
+                                                WidthRequest="10" />
+                                            <Image
+                                                HeightRequest="10"
+                                                Source="star"
+                                                VerticalOptions="Center"
+                                                WidthRequest="10" />
+                                            <Image
+                                                HeightRequest="10"
+                                                Source="star"
+                                                VerticalOptions="Center"
+                                                WidthRequest="10" />
+                                            <Label
+                                                FontSize="12"
+                                                HorizontalOptions="Start"
+                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                Text="1 Reviews"
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Vertical"
+                                        Spacing="0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                                FontSize="10"
+                                                HorizontalOptions="End"
+                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                Text="$250.00"
+                                                TextDecorations="Strikethrough"
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                            <Label
+                                                FontSize="16"
+                                                HorizontalOptions="End"
+                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                Text="{Binding Price}"
+                                                TextColor="#E1323F"
+                                                TextType="Text"
+                                                VerticalOptions="End" />
+                                        </StackLayout>
+                                        <Label
+                                            FontSize="10"
+                                            HorizontalOptions="Start"
+                                            Style="{DynamicResource DefaultLabelStyle2}"
+                                            Text="You save $2.40(10%)"
+                                            TextColor="#eb7a81"
+                                            TextType="Text"
+                                            VerticalOptions="Start" />
+                                        <StackLayout
+                                            Margin="0,8,0,0"
+                                            IsVisible="{Binding StackLayoutIsVisible}"
+                                            Orientation="Horizontal">
+                                            <ImageButton
+                                                BackgroundColor="Transparent"
+                                                HeightRequest="28"
+                                                Source="Minus"
+                                                WidthRequest="28">
+                                                <ImageButton.Behaviors>
+                                                    <behaviour:ViewTappedButtonBehavior AnimationType="Scale" Command="{Binding MinusCommand}" />
+                                                </ImageButton.Behaviors>
+                                            </ImageButton>
+                                            <Label
+                                                Margin="10,0"
+                                                FontSize="18"
+                                                HorizontalOptions="Center"
+                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                Text="{Binding Counter}"
+                                                TextColor="Black"
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                            <ImageButton
+                                                BackgroundColor="Transparent"
+                                                HeightRequest="28"
+                                                Source="Plus"
+                                                WidthRequest="28">
+                                                <ImageButton.Behaviors>
+                                                    <behaviour:ViewTappedButtonBehavior AnimationType="Scale" Command="{Binding PlusCommand}" />
+                                                </ImageButton.Behaviors>
+                                            </ImageButton>
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+
+
+                            <StackLayout BindableLayout.ItemsSource="{Binding ListOfAttributes}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <Label
+                                                Margin="0,8"
+                                                FontSize="20"
+                                                HorizontalOptions="Start"
+                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                Text="{Binding AttributeName}"
+                                                TextType="Text"
+                                                VerticalOptions="Center" />
+                                            <CollectionView
+                                                HeightRequest="50"
+                                                ItemsSource="{Binding datas}"
+                                                SelectedItem="{Binding SelectedItem}"
+                                                SelectionChanged="CollectionView_SelectionChanged"
+                                                SelectionMode="Single">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                                                </CollectionView.ItemsLayout>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Frame
+                                                            Padding="0"
+                                                            BackgroundColor="{Binding VarientValue}"
+                                                            BorderColor="{Binding BorderCol}"
+                                                            HorizontalOptions="Center"
+                                                            Style="{StaticResource FrameStyle}"
+                                                            VerticalOptions="Center">
+                                                            <Label
+                                                                Margin="18,14"
+                                                                FontSize="14"
+                                                                HorizontalOptions="Start"
+                                                                Style="{DynamicResource DefaultLabelStyle2}"
+                                                                Text="{Binding VarientValue}"
+                                                                TextColor="Gray"
+                                                                TextType="Text"
+                                                                VerticalOptions="Center" />
+                                                            <!--<Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.SizeSelectCommand, Source={x:Reference thispage}}" CommandParameter="{Binding .}" />
+                                                            </Frame.GestureRecognizers>-->
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                            </Frame.GestureRecognizers>
+                                                        </Frame>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+
+
+
+                            <StackLayout Margin="0,15,0,0">
+                                <Label
+                                    Margin="0,5"
+                                    FontSize="20"
+                                    HorizontalOptions="Start"
+                                    MaxLines="3"
+                                    Style="{DynamicResource DefaultLabelStyle}"
+                                    Text="Description"
+                                    TextType="Text"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Margin="0,10"
+                                    FontSize="16"
+                                    HorizontalOptions="Start"
+                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                    Text="{Binding Description}"
+                                    TextType="Text"
+                                    VerticalOptions="Center" />
+
+                            </StackLayout>
+                            <BoxView Margin="0,15" Style="{StaticResource BoxViewStyle}" />
+
+                            <StackLayout Margin="0,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Margin="5,0"
+                                        FontSize="20"
+                                        HorizontalOptions="Start"
+                                        Style="{DynamicResource DefaultLabelStyle}"
+                                        Text="Customer Reviews"
+                                        TextType="Text"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="16"
+                                        HorizontalOptions="End"
+                                        Style="{DynamicResource DefaultLabelStyle2}"
+                                        Text="see all"
+                                        TextColor="#0081B1"
+                                        TextDecorations="Underline"
+                                        TextType="Text"
+                                        VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SeeAllCommand}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout>
+                                <Label
+                                    Margin="6,0,0,5"
+                                    FontSize="18"
+                                    HorizontalOptions="Start"
+                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                    Text="Based on 5 reviews"
+                                    TextType="Text"
+                                    VerticalOptions="Center" />
+
+                                <StackLayout HeightRequest="160">
+                                    <CollectionView HorizontalScrollBarVisibility="Never" ItemsSource="{Binding CustomerReviewsList}">
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Horizontal" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Margin="0,15,15,10">
+                                                    <Frame
+                                                        Padding="0"
+                                                        BorderColor="WhiteSmoke"
+                                                        CornerRadius="10"
+                                                        HeightRequest="150"
+                                                        HorizontalOptions="Center"
+                                                        Style="{DynamicResource FrameStyle}"
+                                                        VerticalOptions="Center"
+                                                        WidthRequest="150">
+                                                        <StackLayout>
+                                                            <forms:CachedImage
+                                                                Aspect="AspectFill"
+                                                                ErrorPlaceholder="LoadIcon"
+                                                                HorizontalOptions="FillAndExpand"
+                                                                LoadingPlaceholder="LoadIcon"
+                                                                Source="{Binding ProductImages}"
+                                                                VerticalOptions="FillAndExpand" />
+
+                                                        </StackLayout>
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.CustomerReviewsCommand, Source={x:Reference thispage}}" />
+                                                        </Frame.GestureRecognizers>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        FontSize="16"
+                                        HorizontalOptions="Start"
+                                        Style="{DynamicResource DefaultLabelStyle}"
+                                        Text="Marie-eve Cloutier"
+                                        TextType="Text"
+                                        VerticalOptions="Center" />
+                                    <Frame
+                                        Padding="10,0"
+                                        BackgroundColor="#E9E9E9"
+                                        BorderColor="#E9E9E9"
+                                        CornerRadius="9"
+                                        HasShadow="False"
+                                        HeightRequest="18"
+                                        HorizontalOptions="Start"
+                                        Style="{DynamicResource FrameStyle}">
+                                        <Label
+                                            FontSize="8"
+                                            HorizontalOptions="Center"
+                                            Style="{DynamicResource DefaultLabelStyle2}"
+                                            Text="Verified user"
+                                            TextType="Text"
+                                            VerticalOptions="Center" />
+
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout
+                                    HorizontalOptions="Start"
+                                    Orientation="Horizontal"
+                                    Spacing="2">
+                                    <Image
+                                        HeightRequest="10"
+                                        Source="star"
+                                        VerticalOptions="Center"
+                                        WidthRequest="10" />
+                                    <Image
+                                        HeightRequest="10"
+                                        Source="star"
+                                        VerticalOptions="Center"
+                                        WidthRequest="10" />
+                                    <Image
+                                        HeightRequest="10"
+                                        Source="star"
+                                        VerticalOptions="Center"
+                                        WidthRequest="10" />
+                                    <Image
+                                        HeightRequest="10"
+                                        Source="star"
+                                        VerticalOptions="Center"
+                                        WidthRequest="10" />
+                                    <Image
+                                        HeightRequest="10"
+                                        Source="star"
+                                        VerticalOptions="Center"
+                                        WidthRequest="10" />
+                                    <Label
+                                        Margin="5"
+                                        FontSize="14"
+                                        HorizontalOptions="Start"
+                                        Style="{DynamicResource DefaultLabelStyle2}"
+                                        Text="5 Month"
+                                        TextType="Text"
+                                        VerticalOptions="Center" />
+
+                                </StackLayout>
+                                <Label
+                                    FontSize="16"
+                                    HorizontalOptions="Start"
+                                    Style="{DynamicResource DefaultLabelStyle2}"
+                                    Text="Excellent Products"
+                                    TextType="Text"
+                                    VerticalOptions="Center" />
+                            </StackLayout>
+                            <!--<Image Source="{Binding WishImage}" HorizontalOptions="Center"  VerticalOptions="Center"/>-->
+
+                            <StackLayout Margin="0,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                        Grid.Column="0"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding CustomizeCommand}"
+                                        Style="{DynamicResource DefaultButtonStyle}"
+                                        Text="Customize"
+                                        TextColor="Red" />
+                                    <Button
+                                        Grid.Column="1"
+                                        Command="{Binding BuyNowCommand}"
+                                        IsEnabled="{Binding IsBuyAvailable}"
+                                        Style="{DynamicResource DefaultButtonStyle}"
+                                        Text="{Binding BuyNowText}" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </yummy:PancakeView>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" xmlns:translate="clr-namespace:IMark.Resources" x:Name="thispage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true" BackgroundColor="{DynamicResource CommonPageBackgroundColor}"             
+             material:MaterialNavigationPage.StatusBarColor="{DynamicResource CommonPageBackgroundColor}" NavigationPage.HasNavigationBar="False"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="IMark.Areas.Views.FavoritesPage">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" RowDefinitions="60,*">
+            <StackLayout Margin="0,0,0,5" 
+                Orientation="Vertical">
+                <Grid Margin="5,0">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="5.8*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                     <ImageButton Source="back" CornerRadius="0"
+                                 Grid.Column="0" VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 HeightRequest="25"
+                                 WidthRequest="25"
+                                 Command="{Binding GetBackCommand}"
+                                 BackgroundColor="Transparent"/>
+                    <Label Grid.Column="1" Text="Favorites" Margin="5,0" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                        Style="{StaticResource DefaultLabelStyle}" FontSize="18"/>
+                     </Grid>
+                <BoxView Style="{StaticResource BoxViewStyle}"/>
+            </StackLayout>
+            
+            <Grid Margin="10,0" Grid.Row="1"> 
+                    <CollectionView Margin="0,12" HorizontalScrollBarVisibility="Never" ItemsSource="{Binding FavoritesList}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="20" HorizontalItemSpacing="10" Span="2"  />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate> 
+                              <StackLayout>
+                                  <Frame BorderColor="Transparent" Style="{StaticResource FrameStyle}" BackgroundColor="Gray" HeightRequest="200" HasShadow="False">
+                                      <forms:CachedImage  Source="{Binding Image }" Aspect="Fill" ErrorPlaceholder="LoadIcon" LoadingPlaceholder="LoadIcon"/>
+                                  </Frame>
+                                <StackLayout>
+                                    <Label TextType="Text" MaxLines="2" Style="{DynamicResource DefaultLabelStyle}" Text="{Binding Title }" VerticalOptions="Center" HorizontalOptions="Start" FontSize="12"/>
+                                    <Grid ColumnDefinitions="4*,6*">
+                                        <StackLayout Grid.Column="0" Spacing="2" Orientation="Horizontal" HorizontalOptions="Center">
+                                            <Image Source="{Binding star1}" HeightRequest="10" WidthRequest="10"  VerticalOptions="Center"/>
+                                            <Image Source="{Binding star2}" HeightRequest="10" WidthRequest="10"  VerticalOptions="Center"/>
+                                            <Image Source="{Binding star3}" HeightRequest="10" WidthRequest="10"  VerticalOptions="Center"/>
+                                            <Image Source="{Binding star4}" HeightRequest="10" WidthRequest="10"  VerticalOptions="Center"/>
+                                            <Image Source="{Binding star5}" HeightRequest="10" WidthRequest="10"  VerticalOptions="Center" />
+                                        </StackLayout>
+                                        <Grid Grid.Column="1" ColumnSpacing="1" ColumnDefinitions="3*,*" Margin="0,0">
+                                            <Label TextType="Text" Style="{DynamicResource DefaultLabelStyle}" Text="{Binding Price }"  VerticalOptions="Center" TextColor="Red" HorizontalOptions="End" FontSize="11"/>
+                                            <Label TextDecorations="Strikethrough" Grid.Column="1" TextType="Text" TextColor="Gray" Style="{DynamicResource DefaultLabelStyle2}" Text="11.98" VerticalOptions="Center" HorizontalOptions="End" FontSize="8"/>
+                                        </Grid>
+                                    </Grid>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Path=BindingContext.FavoritesCommand, Source={x:Reference thispage}}" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>  
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

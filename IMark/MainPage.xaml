@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<infrastructure:BaseContentPage
+    x:Class="IMark.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:IMark.Controls;assembly=IMark"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:extensions="clr-namespace:IMark.Extenstions;assembly=IMark"
+    xmlns:infrastructure="clr-namespace:IMark.Infrastructure;assembly=IMark"
+    xmlns:language="clr-namespace:IMark.Resources;assembly=IMark"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Title}"
+    Shell.NavBarIsVisible="true"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                Text="Welcome to Xamarin.Forms!"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</infrastructure:BaseContentPage>
