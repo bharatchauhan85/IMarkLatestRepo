@@ -529,7 +529,7 @@ namespace IMark.Areas.Views
 
         private void Back_Clicked(object sender, EventArgs e)
         {
-            selectedSide = 0;
+            selectedSide = 1;
             Assembly assembly = GetType().GetTypeInfo().Assembly;
             using (var strm = assembly.GetManifestResourceStream("IMark.Resources.Back_tShirt.png"))
             {
