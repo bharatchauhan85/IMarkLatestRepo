@@ -68,8 +68,8 @@
                 HorizontalScrollBarVisibility="Always"
                 Orientation="Horizontal">
                     <StackLayout Orientation="Horizontal">
-                        <Button x:Name="Front View" Clicked="Front_Clicked" Text="Front" />
-                        <Button x:Name="Back View" Clicked="Back_Clicked" Text="Back" />
+                        <Button x:Name="FrontView" Clicked="Front_Clicked" Text="Front" />
+                        <Button x:Name="BackView" Clicked="Back_Clicked" Text="Back" />
                         <Button Clicked="AddTextBtn_Clicked" Text="Add Text" />
                         <Button
                         x:Name="AddImgBtn"
